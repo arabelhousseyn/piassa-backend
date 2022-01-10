@@ -12,7 +12,8 @@ class SellerJob extends Model
 
     protected $fillable = [
         'seller_id',
-        'job'
+        'job',
+        'type'
     ];
 
     protected $hidden = [
