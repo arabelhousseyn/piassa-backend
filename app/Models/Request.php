@@ -20,4 +20,9 @@ class Request extends Model
         'updated_at',
         'deleted_at'
     ];
+
+    public function vehicle()
+    {
+        return $this->belongsTo(UserVehicle::class)->withDefault();
+    }
 }
