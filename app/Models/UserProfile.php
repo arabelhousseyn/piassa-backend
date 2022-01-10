@@ -11,6 +11,7 @@ class UserProfile extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
+        'user_id',
         'province_id',
         'first_name',
         'last_name',
