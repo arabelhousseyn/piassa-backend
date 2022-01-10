@@ -25,4 +25,9 @@ class Request extends Model
     {
         return $this->belongsTo(UserVehicle::class)->withDefault();
     }
+
+    public function informations()
+    {
+        return $this->morphMany(Attribute::class,'attributeable');
+    }
 }

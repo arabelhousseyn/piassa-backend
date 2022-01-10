@@ -22,4 +22,9 @@ class Attribute extends Model
         'updated_at',
         'deleted_at'
     ];
+
+    public function attributeable()
+    {
+        return $this->morphTo();
+    }
 }
