@@ -22,4 +22,9 @@ class Province extends Model
         'updated_at',
         'deleted_at'
     ];
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class)->withDefault();
+    }
 }
