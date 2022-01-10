@@ -11,6 +11,7 @@ use Laravel\Sanctum\HasApiTokens;
 class Seller extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
+    protected $guard = ['seller'];
 
     /**
      * The attributes that are mass assignable.
