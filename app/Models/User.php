@@ -60,4 +60,9 @@ class User extends Authenticatable
         return $this->hasMany(UserVehicle::class);
     }
 
+    public function logins()
+    {
+        return $this->morphMany(Login::class,'loginable');
+    }
+
 }
