@@ -45,4 +45,14 @@ class Seller extends Authenticatable
         'phone_verified_at' => 'datetime'
     ];
 
+    public function profile()
+    {
+        return $this->hasOne(SellerProfile::class);
+    }
+
+    public function jobs()
+    {
+        return $this->hasMany(SellerJob::class);
+    }
+
 }
