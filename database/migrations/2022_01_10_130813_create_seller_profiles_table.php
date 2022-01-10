@@ -15,6 +15,7 @@ class CreateSellerProfilesTable extends Migration
     {
         Schema::create('seller_profiles', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('seller_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('first_name');
             $table->string('last_name');
             $table->string('commercial_name');

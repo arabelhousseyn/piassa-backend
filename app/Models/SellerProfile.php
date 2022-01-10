@@ -11,6 +11,7 @@ class SellerProfile extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
+        'seller_id',
         'first_name',
         'last_name',
         'commercial_name',
