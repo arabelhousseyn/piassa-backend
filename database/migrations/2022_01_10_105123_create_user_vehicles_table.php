@@ -21,6 +21,7 @@ class CreateUserVehiclesTable extends Migration
             $table->year('year');
             $table->string('motorization');
             $table->string('chassis_number');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
