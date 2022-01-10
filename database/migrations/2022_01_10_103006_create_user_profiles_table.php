@@ -20,6 +20,7 @@ class CreateUserProfilesTable extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->enum('gender',['M','w']);
+            $table->unique(['user_id']);
             $table->softDeletes();
             $table->timestamps();
         });
