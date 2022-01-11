@@ -22,4 +22,9 @@ class SellerRequest extends Model
         'deleted_at'
     ];
 
+    public function request()
+    {
+        return $this->belongsTo(Request::class)->withDefault();
+    }
+
 }

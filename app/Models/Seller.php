@@ -55,4 +55,9 @@ class Seller extends Authenticatable
         return $this->hasMany(SellerJob::class);
     }
 
+    public function requests()
+    {
+        return $this->hasMany(SellerRequest::class);
+    }
+
 }
