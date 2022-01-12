@@ -23,4 +23,9 @@ class SellerSuggestion extends Model
         'deleted_at'
     ];
 
+    public function request()
+    {
+        return $this->belongsTo(SellerRequest::class)->withDefault();
+    }
+
 }

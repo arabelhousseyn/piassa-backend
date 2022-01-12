@@ -60,4 +60,9 @@ class Seller extends Authenticatable
         return $this->hasMany(SellerRequest::class);
     }
 
+    public function suggestions()
+    {
+        return $this->hasMany(SellerSuggestion::class);
+    }
+
 }
