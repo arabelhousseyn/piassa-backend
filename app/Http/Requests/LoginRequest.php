@@ -13,7 +13,7 @@ class LoginRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,18 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'phone' => 'required|digits:10',
+            'password' => 'required|min:8'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'phone.required' => 'Téléphone requis.',
+            'phone.digits' => 'Le numéro de téléphone doit être composé de 10 chiffres.',
+            'password.required' => 'Mote de passe requis.',
+            'password.min' => 'L mot de passe doit avoir une longueur minimale de 8',
         ];
     }
 }
