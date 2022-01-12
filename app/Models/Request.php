@@ -30,4 +30,9 @@ class Request extends Model
     {
         return $this->morphMany(Attribute::class,'attributeable');
     }
+
+    public function suggestions()
+    {
+        return $this->hasMany(SellerRequest::class);
+    }
 }
