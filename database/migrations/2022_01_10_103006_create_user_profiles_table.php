@@ -17,8 +17,7 @@ class CreateUserProfilesTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('province_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->string('first_name');
-            $table->string('last_name');
+            $table->string('full_name');
             $table->enum('gender',['M','w']);
             $table->unique(['user_id']);
             $table->softDeletes();

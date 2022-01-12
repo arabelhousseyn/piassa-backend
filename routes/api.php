@@ -2,7 +2,12 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Api\V1\{
+    LoginController,
+    RegisterController
+};
+use App\Models\User;
+use Spatie\Permission\Models\Role;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -16,4 +21,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+
+
+Route::post('login',LoginController::class);
+Route::post('register',RegisterController::class);
+
+Route::middleware('auth:sanctum')->group(function(){
+
 });
