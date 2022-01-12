@@ -5,10 +5,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\{
     ProvinceController,
     LoginController,
-    RegisterController
+    RegisterController,
+    VehicleController,
+    SignController,
+    UserController
 };
-use App\Models\User;
-use Spatie\Permission\Models\Role;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -32,4 +33,10 @@ Route::post('register',RegisterController::class);
 
 Route::middleware('auth:sanctum')->group(function(){
 
+    Route::prefix('/user')->group(function(){
+        Route::get('insert_location/{location?}',[UserController::class,'insert_location'])->whereAlphaNumeric('location');
+    });
+
+    Route::apiResource('sign',SignController::class);
+    Route::apiResource('vehicle',VehicleController::class);
 });
