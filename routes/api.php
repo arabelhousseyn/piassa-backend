@@ -8,7 +8,8 @@ use App\Http\Controllers\Api\V1\{
     RegisterController,
     VehicleController,
     SignController,
-    UserController
+    UserController,
+    LoginSellerController
 };
 /*
 |--------------------------------------------------------------------------
@@ -28,8 +29,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::apiResource('provinces',ProvinceController::class);
 
-Route::post('login',LoginController::class);
-Route::post('register',RegisterController::class);
+Route::prefix('user')->group(function(){
+    Route::post('login',LoginController::class);
+    Route::post('register',RegisterController::class);
+});
+
+Route::prefix('seller')->group(function(){
+    Route::post('login',LoginSellerController::class);
+    //Route::post('register',RegisterController::class);
+});
 
 Route::middleware('auth:sanctum')->group(function(){
 
