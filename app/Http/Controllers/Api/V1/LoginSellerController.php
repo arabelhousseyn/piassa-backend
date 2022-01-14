@@ -20,7 +20,10 @@ class LoginSellerController extends Controller
         {
             if(Auth::guard('seller')->attempt($request->only('phone','password')))
             {
-                return Auth::guard('seller')->user();
+                $user = Auth::guard('seller')->user();
+                $token = $user->createToken('piassa')->plainTextToken;
+                $user['token'] = $token;
+                return response($user,200);
             }else{
                 return response(['success' => false],200);
             }
