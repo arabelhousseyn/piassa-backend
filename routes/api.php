@@ -9,7 +9,8 @@ use App\Http\Controllers\Api\V1\{
     VehicleController,
     SignController,
     UserController,
-    LoginSellerController
+    LoginSellerController,
+    SellerController
 };
 /*
 |--------------------------------------------------------------------------
@@ -36,13 +37,16 @@ Route::prefix('user')->group(function(){
 
 Route::prefix('seller')->group(function(){
     Route::post('login',LoginSellerController::class);
-    //Route::post('register',RegisterController::class);
 });
 
 Route::middleware('auth:sanctum')->group(function(){
 
     Route::prefix('/user')->group(function(){
         Route::get('insert_location/{location?}',[UserController::class,'insert_location'])->whereAlphaNumeric('location');
+    });
+
+    Route::prefix('/seller')->group(function(){
+        Route::get('insert_locationn/{location?}',[SellerController::class,'insert_location']);
     });
 
     Route::apiResource('sign',SignController::class);
