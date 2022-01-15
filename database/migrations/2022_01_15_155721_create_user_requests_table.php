@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSellerJobsTable extends Migration
+class CreateUserRequestsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateSellerJobsTable extends Migration
      */
     public function up()
     {
-        Schema::create('seller_jobs', function (Blueprint $table) {
+        Schema::create('user_requests', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('seller_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->string('job');
+            $table->foreignId('user_vehicle_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->enum('type',['P','C','B','PN']);
             $table->softDeletes();
             $table->timestamps();
@@ -30,6 +29,6 @@ class CreateSellerJobsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('seller_jobs');
+        Schema::dropIfExists('user_requests');
     }
 }
