@@ -50,7 +50,9 @@ Route::middleware('auth:sanctum')->group(function(){
         Route::get('insert_locationn/{location?}',[SellerController::class,'insert_location']);
     });
 
-    Route::apiResource('sign',SignController::class);
-    Route::apiResource('vehicle',VehicleController::class);
-    Route::apiResource('request',RequestUserController::class);
+    Route::apiResources([
+        'sign' => SignController::class,
+        'vehicle' => VehicleController::class,
+        'user/request' => RequestUserController::class,
+    ]);
 });
