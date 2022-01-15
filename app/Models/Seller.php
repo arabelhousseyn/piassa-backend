@@ -45,6 +45,8 @@ class Seller extends Authenticatable
         'phone_verified_at' => 'datetime'
     ];
 
+    protected $appends = ['has_location'];
+
     public function profile()
     {
         return $this->hasOne(SellerProfile::class);
@@ -63,6 +65,16 @@ class Seller extends Authenticatable
     public function suggestions()
     {
         return $this->hasMany(SellerSuggestion::class);
+    }
+
+    public function getHasLocationAttribute()
+    {
+        if($this->profile->location === null)
+        {
+            return false;
+        }else{
+            return true;
+        }
     }
 
 }

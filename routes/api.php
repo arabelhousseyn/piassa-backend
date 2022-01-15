@@ -10,7 +10,8 @@ use App\Http\Controllers\Api\V1\{
     SignController,
     UserController,
     LoginSellerController,
-    SellerController
+    SellerController,
+    RequestUserController
 };
 /*
 |--------------------------------------------------------------------------
@@ -51,4 +52,5 @@ Route::middleware('auth:sanctum')->group(function(){
 
     Route::apiResource('sign',SignController::class);
     Route::apiResource('vehicle',VehicleController::class);
+    Route::apiResource('request',RequestUserController::class);
 });
