@@ -12,7 +12,7 @@ class SellerRequest extends Model
 
     protected $fillable = [
         'seller_id',
-        'request_id',
+        'user_request_id',
         'suggest_him_at'
     ];
 
@@ -24,7 +24,7 @@ class SellerRequest extends Model
 
     public function request()
     {
-        return $this->belongsTo(Request::class)->withDefault();
+        return $this->belongsTo(UserRequest::class)->withDefault();
     }
 
     public function suggestion()

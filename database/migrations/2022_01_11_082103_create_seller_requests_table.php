@@ -16,7 +16,7 @@ class CreateSellerRequestsTable extends Migration
         Schema::create('seller_requests', function (Blueprint $table) {
             $table->id();
             $table->foreignId('seller_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('request_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('user_request_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->timestamp('suggest_him_at');
             $table->softDeletes();
             $table->timestamps();
