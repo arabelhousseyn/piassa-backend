@@ -25,7 +25,14 @@ class LoginSellerController extends Controller
                 $user['token'] = $token;
                 return response($user,200);
             }else{
-                return response(['success' => false],200);
+                $message = [
+                    'message' => [
+                        'errors' => [
+                            'Un de vos informations incorrect'
+                        ]
+                    ]
+                ];
+                return response($message,403);
             }
         }
     }
