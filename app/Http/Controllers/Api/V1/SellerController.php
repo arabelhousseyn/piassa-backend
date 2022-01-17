@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 
-use App\Models\{Seller,SellerRequest};
+use App\Models\{Seller};
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 class SellerController extends Controller
@@ -23,7 +23,10 @@ class SellerController extends Controller
 
     public function list_requests()
     {
-        $seller = Seller::with('requests.request.vehicle.sign','requests.request.vehicle.user.profile.province')->find(Auth::id());
+        $seller = Seller::with('requests.request.vehicle.sign','requests.request.vehicle.user.profile.province')
+            ->with(['requests' => function($query){
+                return $query->whereNull('suggest_him_at');
+            }])->find(Auth::id());
         $requests = $seller->requests->map(function($map){
             return $map->only('request');
         });
@@ -52,6 +55,12 @@ class SellerController extends Controller
         }
 
         return response($data,200);
+
+    }
+
+
+    public function store_seller_suggestion($seller_request_id)
+    {
 
     }
 }

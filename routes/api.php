@@ -50,6 +50,7 @@ Route::middleware('auth:sanctum')->group(function(){
         Route::get('insert_locationn/{location?}',[SellerController::class,'insert_location']);
         Route::get('list_requests',[SellerController::class,'list_requests']);
         Route::get('count_seller_requests_by_type/{types}',[SellerController::class,'count_seller_requests_by_type']);
+        Route::get('store_seller_suggestion/{seller_request_id}',[SellerController::class,'store_seller_suggestion'])->whereNumber('seller_request_id');
     });
 
     Route::apiResources([
