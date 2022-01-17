@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 
-use App\Models\{Seller};
+use App\Http\Requests\StoreSellerSuggestionRequest;
+use App\Models\{Seller,SellerRequest};
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\Support\Carbon;
 class SellerController extends Controller
 {
     public function insert_location($location)
@@ -59,8 +61,18 @@ class SellerController extends Controller
     }
 
 
-    public function store_seller_suggestion($seller_request_id)
+    public function store_seller_suggestion(StoreSellerSuggestionRequest $request)
     {
+        SellerRequest::whereId($request->seller_request_id)->update([
+            'suggest_him_at' => Carbon::now()
+        ]);
 
+        $seller_request = SellerRequest::find($request->seller_request_id);
+        $seller_request->suggestion()->create([
+            'mark' => $request->mark,
+            'price' => $request->price,
+            'available_at' => $request->available_at,
+        ]);
+        return response(['success' => true],200);
     }
 }
