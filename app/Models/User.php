@@ -66,4 +66,5 @@ class User extends Authenticatable
         return $this->morphMany(Login::class,'loginable');
     }
 
+
 }

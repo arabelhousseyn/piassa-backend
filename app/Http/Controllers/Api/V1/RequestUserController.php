@@ -119,7 +119,7 @@ class RequestUserController extends Controller
                 }
             }
 
-            return response(['success' => true],200);
+            return response(['success' => true,'request_id' => $operation->id],200);
         }
     }
 

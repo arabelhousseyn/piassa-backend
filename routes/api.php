@@ -44,6 +44,8 @@ Route::middleware('auth:sanctum')->group(function(){
 
     Route::prefix('/user')->group(function(){
         Route::get('insert_location/{location?}',[UserController::class,'insert_location'])->whereAlphaNumeric('location');
+        Route::get('list_suggestions_request/{request_id}',[UserController::class,'list_suggestions_request'])->whereNumber('request_id');
+        Route::get('user_list_requests_by_vehicle/{user_vehicle_id}',[UserController::class,'user_list_requests_by_vehicle'])->whereNumber('user_vehicle_id');
     });
 
     Route::prefix('/seller')->group(function(){
