@@ -48,6 +48,7 @@ Route::middleware('auth:sanctum')->group(function(){
 
     Route::prefix('/seller')->group(function(){
         Route::get('insert_locationn/{location?}',[SellerController::class,'insert_location']);
+        Route::get('list_requests',[SellerController::class,'list_requests']);
     });
 
     Route::apiResources([

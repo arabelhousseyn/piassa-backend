@@ -23,7 +23,7 @@ class UserRequest extends Model
 
     public function vehicle()
     {
-        return $this->belongsTo(UserVehicle::class)->withDefault();
+        return $this->belongsTo(UserVehicle::class,'user_vehicle_id')->withDefault();
     }
 
     public function informations()

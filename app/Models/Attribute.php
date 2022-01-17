@@ -20,7 +20,9 @@ class Attribute extends Model
     protected $hidden = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
+        'attributeable_type',
+        'attributeable_id'
     ];
 
     public function attributeable()
