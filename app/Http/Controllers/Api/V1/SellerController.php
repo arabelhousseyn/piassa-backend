@@ -22,7 +22,7 @@ class SellerController extends Controller
 
     public function list_requests()
     {
-        $seller = Seller::with('requests','requests.request','requests.request.informations','requests.request.vehicle','requests.request.vehicle.sign')->find(Auth::id());
+        $seller = Seller::with('requests.request.vehicle.sign','requests.request.vehicle.user.profile.province')->find(Auth::id());
         $requests = $seller->requests->map(function($map){
             return collect($map->only('request'));
         });
