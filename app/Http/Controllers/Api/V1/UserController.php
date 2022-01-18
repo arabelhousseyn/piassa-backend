@@ -34,4 +34,11 @@ class UserController extends Controller
         $requests = UserRequest::with('informations')->where('user_vehicle_id',$user_vehicle_id)->get();
         return response($requests,200);
     }
+
+    public function count_suggestions_request($request_id)
+    {
+        $suggestions = UserRequest::with('suggestions','vehicle.user')->find($request_id);
+
+        return response(['count' => count($suggestions->suggestions)],200);
+    }
 }
