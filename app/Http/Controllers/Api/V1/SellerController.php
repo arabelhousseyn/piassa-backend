@@ -9,6 +9,7 @@ use App\Models\{Seller,SellerRequest};
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
+use App\Events\NewSuggestionEvent;
 class SellerController extends Controller
 {
     public function insert_location($location)
@@ -73,6 +74,8 @@ class SellerController extends Controller
             'price' => $request->price,
             'available_at' => $request->available_at,
         ]);
+        $data = SellerRequest::with('suggestion')->find($request->seller_request_id);
+        event(new NewSuggestionEvent($data));
         return response(['success' => true],200);
     }
 }
