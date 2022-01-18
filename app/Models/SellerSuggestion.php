@@ -14,7 +14,8 @@ class SellerSuggestion extends Model
         'seller_request_id',
         'mark',
         'price',
-        'available_at'
+        'available_at',
+        'taken_at'
     ];
 
     protected $hidden = [

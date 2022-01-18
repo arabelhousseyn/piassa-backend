@@ -26,7 +26,8 @@ class SellerController extends Controller
 
     public function list_requests()
     {
-        $seller = Seller::with('requests.request.vehicle.sign','requests.request.vehicle.user.profile.province')
+        $seller = Seller::with('requests.request.vehicle.sign','requests.request.vehicle.user.profile.province','requests.request.informations'
+        ,'requests.request.vehicle.user.locations')
             ->with(['requests' => function($query){
                 return $query->whereNull('suggest_him_at');
             }])->find(Auth::id());
