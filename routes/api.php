@@ -29,6 +29,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
+
 Route::apiResource('provinces',ProvinceController::class);
 
 Route::prefix('user')->group(function(){

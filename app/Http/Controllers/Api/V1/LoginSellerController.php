@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginSellerRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Seller;
 class LoginSellerController extends Controller
 {
     /**
@@ -22,8 +23,9 @@ class LoginSellerController extends Controller
             {
                 $user = Auth::guard('seller')->user();
                 $token = $user->createToken('piassa')->plainTextToken;
-                $user['token'] = $token;
-                return response($user,200);
+                $seller = Seller::with('profile','jobs')->find(Auth::guard('seller')->id());
+                $seller['token'] = $token;
+                return response($seller,200);
             }else{
                 $message = [
                     'message' => [

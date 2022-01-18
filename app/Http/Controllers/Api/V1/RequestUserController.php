@@ -9,6 +9,7 @@ use App\Models\{UserRequest,Seller,User};
 use Illuminate\Support\Facades\Auth;
 use \KMLaravel\GeographicalCalculator\Facade\GeoFacade;
 use Illuminate\Support\Str;
+use App\Events\NewRequestEvent;
 class RequestUserController extends Controller
 {
     /**
@@ -118,6 +119,8 @@ class RequestUserController extends Controller
                     ]);
                 }
             }
+
+            event(New NewRequestEvent($operation));
 
             return response(['success' => true,'request_id' => $operation->id],200);
         }
