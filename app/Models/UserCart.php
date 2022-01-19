@@ -36,6 +36,11 @@ class UserCart extends Model
         return $this->belongsTo(SellerSuggestion::class,'seller_suggestion_id')->withDefault();
     }
 
+    public function items()
+    {
+        return $this->hasMany(UserCartItem::class);
+    }
+
     protected function getIsEmptyAttribute()
     {
         return ($this->attributes['empty_at'] !== null) ? true : false;
