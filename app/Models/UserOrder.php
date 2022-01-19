@@ -6,13 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class UserCartItem extends Model
+class UserOrder extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'user_cart_id',
-        'seller_suggestion_id'
+        'ref',
+        'user_id',
+        'type_delivery',
+        'location',
+        'promo_code'
     ];
 
     protected $hidden = [
@@ -21,10 +24,8 @@ class UserCartItem extends Model
         'deleted_at'
     ];
 
-    public function item()
+    public function items()
     {
-        return $this->belongsTo(SellerSuggestion::class,'seller_suggestion_id')->withDefault();
+        return $this->hasMany(UserOrderItem::class);
     }
-
-
 }

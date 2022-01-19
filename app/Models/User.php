@@ -66,5 +66,10 @@ class User extends Authenticatable
         return $this->morphMany(Login::class,'loginable');
     }
 
+    public function orders()
+    {
+        return $this->hasMany(UserOrder::class);
+    }
+
 
 }
