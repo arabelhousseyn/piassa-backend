@@ -16,7 +16,6 @@ class CreateUserCartsTable extends Migration
         Schema::create('user_carts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('seller_suggestion_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->date('full_at');
             $table->date('empty_at')->nullable();
             $table->softDeletes();

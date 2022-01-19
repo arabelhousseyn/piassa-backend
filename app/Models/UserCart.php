@@ -12,7 +12,6 @@ class UserCart extends Model
 
     protected $fillable = [
         'user_id',
-        'seller_suggestion_id',
         'full_at',
         'empty_at'
     ];

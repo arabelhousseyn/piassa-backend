@@ -12,10 +12,7 @@ class UserCartItem extends Model
 
     protected $fillable = [
         'user_cart_id',
-        'mark',
-        'price',
-        'qt',
-        'available_at'
+        'seller_suggestion_id'
     ];
 
     protected $hidden = [

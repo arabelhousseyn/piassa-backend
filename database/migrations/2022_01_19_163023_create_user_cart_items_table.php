@@ -16,10 +16,7 @@ class CreateUserCartItemsTable extends Migration
         Schema::create('user_cart_items', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_cart_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->string('mark');
-            $table->double('price');
-            $table->string('qt');
-            $table->date('available_at');
+            $table->foreignId('seller_suggestion_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
         });
