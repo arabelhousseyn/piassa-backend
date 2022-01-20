@@ -65,18 +65,39 @@ class SellerController extends Controller
 
     public function store_seller_suggestion(StoreSellerSuggestionRequest $request)
     {
-        SellerRequest::whereId($request->seller_request_id)->update([
-            'suggest_him_at' => Carbon::now()
-        ]);
+        $marks = explode(',',$request->marks);
+        $prices = explode(',',$request->prices);
+        $available_at = explode(',',$request->available_at);
 
-        $seller_request = SellerRequest::find($request->seller_request_id);
-        $seller_request->suggestion()->create([
-            'mark' => $request->mark,
-            'price' => $request->price,
-            'available_at' => $request->available_at,
-        ]);
-        $data = SellerRequest::with('suggestion')->find($request->seller_request_id);
-        event(new NewSuggestionEvent($data));
-        return response(['success' => true],200);
+        if(count($marks) == count($prices) && count($marks) == count($available_at) &&
+        count($prices) == count($available_at))
+            {
+                SellerRequest::whereId($request->seller_request_id)->update([
+                    'suggest_him_at' => Carbon::now()
+                ]);
+
+                $seller_request = SellerRequest::find($request->seller_request_id);
+                for ($i=0;$i<count($marks);$i++)
+                {
+                    $seller_request->suggestion()->create([
+                        'mark' => $marks[$i],
+                        'price' => $prices[$i],
+                        'available_at' => $available_at[$i],
+                    ]);
+                }
+                $data = SellerRequest::with('suggestion')->find($request->seller_request_id);
+                event(new NewSuggestionEvent($data));
+                return response(['success' => true],200);
+
+            }else{
+            $message = [
+                'message' => [
+                    'errors' => [
+                        'Erreur veuillez réessayer.'
+                    ]
+                ]
+            ];
+            return response($message,403);
+        }
     }
 }
