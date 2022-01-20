@@ -17,6 +17,7 @@ class LoginController extends Controller
      */
     public function __invoke(LoginRequest $request)
     {
+
         if($request->validated())
         {
             if(Auth::attempt($request->only('phone','password')))
