@@ -7,6 +7,12 @@ use App\Http\Requests\StoreUserCartRequest;
 Use App\Models\{UserCart,UserCartItem};
 class UserCartController extends Controller
 {
+
+    public function info_cart()
+    {
+
+    }
+
     public function store_cart(StoreUserCartRequest $request)
     {
         if($request->validated())
