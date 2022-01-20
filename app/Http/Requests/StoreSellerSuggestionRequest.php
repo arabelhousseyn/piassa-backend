@@ -25,8 +25,8 @@ class StoreSellerSuggestionRequest extends FormRequest
     {
         return [
             'seller_request_id' => 'required|integer',
-            'mark' => 'required',
-            'price' => 'required',
+            'marks' => 'required',
+            'prices' => 'required',
             'available_at' => 'required'
         ];
     }
