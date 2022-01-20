@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\VehicleRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\{User};
+use App\Models\{User,Sign};
+use Illuminate\Support\Str;
 class VehicleController extends Controller
 {
     /**
@@ -42,6 +43,21 @@ class VehicleController extends Controller
     {
         if($request->validated())
         {
+            // chassis number prefix compatible with the prefix of sign
+            $sign = Sign::find($request->sign_id);
+            if(!Str::startsWith($request->chassis_number,$sign->prefix))
+            {
+                $message = [
+                    'message' => [
+                        'errors' => [
+                            'chassis_number' => [
+                                'N° châssis incorrect'
+                            ]
+                        ]
+                    ]
+                ];
+                return response($message,403);
+            }
             Auth::user()->vehicle()->create([
               'sign_id' => $request->sign_id,
               'model' => $request->model,

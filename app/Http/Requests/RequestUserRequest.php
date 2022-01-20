@@ -25,6 +25,7 @@ class RequestUserRequest extends FormRequest
     {
         return [
             'user_vehicle_id' => 'required|integer',
+            'qt' => 'required|integer',
             'type' => 'required'
         ];
     }
@@ -34,6 +35,8 @@ class RequestUserRequest extends FormRequest
         return [
             'user_vehicle_id.required' => 'Erreur veuillez réessayer.',
             'user_vehicle_id.integer' => 'Erreur veuillez réessayer.',
+            'qt.required' => 'Quantité requis.',
+            'qt.integer' => 'Quantité doit être un nombre.',
             'type.required' => 'Erreur veuillez réessayer.',
         ];
     }

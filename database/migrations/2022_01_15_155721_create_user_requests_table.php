@@ -16,6 +16,7 @@ class CreateUserRequestsTable extends Migration
         Schema::create('user_requests', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_vehicle_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->string('qt');
             $table->enum('type',['P','C','B','PN']);
             $table->softDeletes();
             $table->timestamps();

@@ -12,6 +12,7 @@ class UserRequest extends Model
 
     protected $fillable = [
         'user_vehicle_id',
+        'qt',
         'type'
     ];
 
@@ -19,6 +20,10 @@ class UserRequest extends Model
         'created_at',
         'updated_at',
         'deleted_at'
+    ];
+
+    protected $casts = [
+        'qt' => 'integer'
     ];
 
     public function vehicle()
