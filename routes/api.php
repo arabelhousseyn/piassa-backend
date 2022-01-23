@@ -55,7 +55,9 @@ Route::middleware('auth:sanctum')->group(function(){
         });
 
         Route::prefix('order')->group(function(){
-
+            Route::get('index',[UserOrderController::class,'list_orders']);
+            Route::get('detail/{id}',[UserOrderController::class,'order_details'])->whereNumber('id');
+            Route::post('store',[UserOrderController::class,'store_order']);
         });
 
     });
