@@ -12,7 +12,8 @@ use App\Http\Controllers\Api\V1\{
     LoginSellerController,
     SellerController,
     RequestUserController,
-    UserCartController
+    UserCartController,
+    UserOrderController
 };
 /*
 |--------------------------------------------------------------------------
@@ -51,6 +52,10 @@ Route::middleware('auth:sanctum')->group(function(){
             Route::post('store',[UserCartController::class,'store_cart']);
             Route::delete('destory_item/{id}',[UserCartController::class,'destory_items_cart'])->whereNumber('id');
             Route::delete('destory/{id}',[UserCartController::class,'destory_cart'])->whereNumber('id');
+        });
+
+        Route::prefix('order')->group(function(){
+
         });
 
     });
