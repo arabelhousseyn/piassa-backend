@@ -25,12 +25,6 @@ use App\Http\Controllers\Api\V1\{
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-
-
 Route::apiResource('provinces',ProvinceController::class);
 
 Route::prefix('user')->group(function(){
