@@ -24,14 +24,16 @@ class StoreUserCartRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'seller_suggestion_id' => 'required|integer',
+            ''
         ];
     }
 
     public function messages()
     {
         return [
-
+            'seller_suggestion_id.required' => 'Erreur veuillez réessayer.',
+            'seller_suggestion_id.integer' => 'Erreur veuillez réessayer.'
         ];
     }
 }
