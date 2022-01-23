@@ -54,6 +54,7 @@ Route::middleware('auth:sanctum')->group(function(){
             Route::delete('destory/{id}',[UserCartController::class,'destory_cart'])->whereNumber('id');
         });
 
+        // order
         Route::prefix('order')->group(function(){
             Route::get('index',[UserOrderController::class,'list_orders']);
             Route::get('detail/{id}',[UserOrderController::class,'order_details'])->whereNumber('id');

@@ -24,14 +24,16 @@ class UserOrderRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'user_cart_id' => 'required|integer',
+
         ];
     }
 
     public function messages()
     {
         return [
-
+            'user_cart_id.required' => 'Erreur veuillez réessayer.',
+            'user_cart_id.integer' => 'Erreur veuillez réessayer.'
         ];
     }
 }
