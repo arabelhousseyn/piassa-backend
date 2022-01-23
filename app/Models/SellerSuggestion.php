@@ -26,7 +26,7 @@ class SellerSuggestion extends Model
 
     public function request()
     {
-        return $this->belongsTo(SellerRequest::class)->withDefault();
+        return $this->belongsTo(SellerRequest::class,'seller_request_id')->withDefault();
     }
 
 }

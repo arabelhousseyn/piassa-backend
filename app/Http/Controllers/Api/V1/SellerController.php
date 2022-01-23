@@ -22,6 +22,7 @@ class SellerController extends Controller
         {
             return response(['success' => true],200);
         }
+        return response(['success' => false],433);
     }
 
     public function list_requests()

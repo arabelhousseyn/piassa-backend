@@ -53,10 +53,10 @@ Route::middleware('auth:sanctum')->group(function(){
 
         // cart
         Route::prefix('cart')->group(function(){
-            Route::post('index',[UserCartController::class,'info_cart']);
+            Route::get('index',[UserCartController::class,'info_cart']);
             Route::post('store',[UserCartController::class,'store_cart']);
-            Route::delete('destory_item',[UserCartController::class,'destory_items_cart']);
-            Route::delete('destory',[UserCartController::class,'destory_cart']);
+            Route::delete('destory_item/{id}',[UserCartController::class,'destory_items_cart'])->whereNumber('id');
+            Route::delete('destory/{id}',[UserCartController::class,'destory_cart'])->whereNumber('id');
         });
 
     });
