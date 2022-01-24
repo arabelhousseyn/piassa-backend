@@ -22,4 +22,9 @@ class ShipperProfile extends Model
         'updated_at',
         'deleted_at'
     ];
+
+    public function province()
+    {
+        return $this->belongsTo(Province::class,'province_id')->withDefault();
+    }
 }
