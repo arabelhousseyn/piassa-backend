@@ -14,7 +14,8 @@ use App\Http\Controllers\Api\V1\{
     RequestUserController,
     UserCartController,
     UserOrderController,
-    LoginShipperController
+    LoginShipperController,
+    ShipperController
 };
 /*
 |--------------------------------------------------------------------------
