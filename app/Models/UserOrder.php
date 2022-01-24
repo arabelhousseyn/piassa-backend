@@ -15,7 +15,8 @@ class UserOrder extends Model
         'user_id',
         'type_delivery',
         'location',
-        'promo_code'
+        'promo_code',
+        'confirmed_at'
     ];
 
     protected $hidden = [
@@ -31,5 +32,10 @@ class UserOrder extends Model
     public function events()
     {
         return $this->hasMany(UserOrderEvent::class);
+    }
+
+    public function shipper_user_order()
+    {
+        return $this->hasMany(ShipperUserOrder::class);
     }
 }

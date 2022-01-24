@@ -12,12 +12,16 @@ class ShipperUserOrder extends Model
 
     protected $fillable = [
         'user_order_id',
-        'shipper_id',
-        'confirmed_at'
+        'shipper_id'
     ];
 
     protected $hidden = [
         'updated_at',
         'deleted_at'
     ];
+
+    public function order()
+    {
+        return $this->belongsTo(UserOrder::class,'user_order_id')->withDefault();
+    }
 }

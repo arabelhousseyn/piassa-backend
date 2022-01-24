@@ -17,7 +17,6 @@ class CreateShipperUserOrdersTable extends Migration
             $table->id();
             $table->foreignId('user_order_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('shipper_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->timestamp('confirmed_at')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
