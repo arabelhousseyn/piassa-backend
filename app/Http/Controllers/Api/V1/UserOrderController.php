@@ -14,9 +14,9 @@ class UserOrderController extends Controller
 
     public function list_orders()
     {
-        $user_orders = User::with('orders')->find(Auth::id());
+        $user_orders = User::with('orders.events')->find(Auth::id());
         $orders = $user_orders->orders->map(function($query){
-            return $query->only('id','ref','type_delivery','location','created_at');
+            return $query->only('id','ref','type_delivery','location','created_at','events');
         });
         return response($orders,200);
     }
@@ -76,7 +76,7 @@ class UserOrderController extends Controller
 
     public function order_details($id)
     {
-        $user_order = UserOrder::with('items.item.request.request.informations')->find($id);
-        return response($user_order->only('id','ref','type_delivery','location','items','created_at'),200);
+        $user_order = UserOrder::with('items.item.request.request.informations','events')->find($id);
+        return response($user_order->only('id','ref','type_delivery','location','items','created_at','events'),200);
     }
 }

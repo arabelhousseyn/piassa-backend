@@ -6,30 +6,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class UserOrder extends Model
+class UserOrderEvent extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'ref',
-        'user_id',
-        'type_delivery',
-        'location',
-        'promo_code'
+        'user_order_id',
+        'event'
     ];
 
     protected $hidden = [
         'updated_at',
         'deleted_at'
     ];
-
-    public function items()
-    {
-        return $this->hasMany(UserOrderItem::class);
-    }
-
-    public function events()
-    {
-        return $this->hasMany(UserOrderEvent::class);
-    }
 }
