@@ -13,7 +13,8 @@ use App\Http\Controllers\Api\V1\{
     SellerController,
     RequestUserController,
     UserCartController,
-    UserOrderController
+    UserOrderController,
+    LoginShipperController
 };
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,10 @@ Route::prefix('user')->group(function(){
 
 Route::prefix('seller')->group(function(){
     Route::post('login',LoginSellerController::class);
+});
+
+Route::prefix('shipper')->group(function (){
+    Route::post('login',LoginShipperController::class);
 });
 
 Route::middleware('auth:sanctum')->group(function(){
