@@ -13,12 +13,12 @@ class UserCartController extends Controller
     public function info_cart()
     {
         $carts = User::with(['carts' => function($query){
-            return $query->latest()->first();
+            return $query->where('empty_at',null)->latest()->first();
         }])->find(Auth::id());
         if(@$carts->carts[0])
         {
             $user_cart = UserCart::with('items.item.request.request')->find($carts->carts[0]->id);
-            return response($user_cart->items,200);
+            return response($user_cart->only('id','full_at','is_empty','items'),200);
         }else{
             return response([],200);
         }
