@@ -29,14 +29,20 @@ use App\Http\Controllers\Api\V1\{
 
 Route::apiResource('provinces',ProvinceController::class);
 
+
+// Auth and register for user
 Route::prefix('user')->group(function(){
     Route::post('login',LoginController::class);
     Route::post('register',RegisterController::class);
 });
 
+// auth for seller
+
 Route::prefix('seller')->group(function(){
     Route::post('login',LoginSellerController::class);
 });
+
+// auth for shipper
 
 Route::prefix('shipper')->group(function (){
     Route::post('login',LoginShipperController::class);
@@ -73,6 +79,10 @@ Route::middleware('auth:sanctum')->group(function(){
         Route::get('list_requests',[SellerController::class,'list_requests']);
         Route::get('count_seller_requests_by_type/{types}',[SellerController::class,'count_seller_requests_by_type']);
         Route::post('store_seller_suggestion',[SellerController::class,'store_seller_suggestion']);
+    });
+
+    Route::prefix('/shipper')->group(function (){
+
     });
 
     Route::apiResources([

@@ -24,7 +24,7 @@ class LoginShipperController extends Controller
             {
                 $user = Auth::guard('shipper')->user();
                 $token = $user->createToken('piassa')->plainTextToken;
-                $shipper = Shipper::with('profile','jobs')->find(Auth::guard('shipper')->id());
+                $shipper = Shipper::with('profile')->find(Auth::guard('shipper')->id());
                 $shipper['token'] = $token;
                 return response($shipper,200);
             }else{
