@@ -50,7 +50,7 @@ class Shipper extends Authenticatable
         return $this->hasOne(ShipperProfile::class)->withDefault();
     }
 
-    public function order_requests()
+    public function orderRequests()
     {
         return $this->hasMany(ShipperUserOrder::class);
     }

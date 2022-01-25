@@ -18,12 +18,11 @@ class UserController extends Controller
 
     public function list_suggestions_request($request_id)
     {
-        $data = UserRequest::with(['suggestions.suggestion' => function($query){
-            return $query->whereNull('taken_at');
-        }])
-            ->with(['suggestions' => function($query){
+        $data = UserRequest::with(['suggestions' => function($query){
                 return $query->whereNotNull('suggest_him_at');
-            }])->whereId($request_id)->first();
+            }])->with(['suggestions.suggestion' => function($query){
+            return $query->whereNull('taken_at');
+        }])->whereId($request_id)->first();
 
 
         return response($data,200);
@@ -37,7 +36,7 @@ class UserController extends Controller
 
     public function count_suggestions_request($request_id)
     {
-        $suggestions = UserRequest::with('suggestions','vehicle.user')->find($request_id);
+        $suggestions = UserRequest::with('suggestions')->find($request_id);
 
         return response(['count' => count($suggestions->suggestions)],200);
     }

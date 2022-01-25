@@ -83,7 +83,7 @@ Route::middleware('auth:sanctum')->group(function(){
     });
 
     Route::prefix('/shipper')->group(function (){
-
+        Route::get('order_requests',[ShipperController::class,'index']);
     });
 
     Route::apiResources([
