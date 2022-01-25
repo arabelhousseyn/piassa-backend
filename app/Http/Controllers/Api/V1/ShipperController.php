@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Models\{Shipper,UserOrder};
+use App\Models\{Shipper, User, UserOrder};
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
 class ShipperController extends Controller
@@ -71,10 +71,23 @@ class ShipperController extends Controller
         $data = Shipper::with('orderRequests.order.items.item.request.request.informations')->
         with(['orderRequests.order' => function($query){
             return $query->whereNotNull('confirmed_at');
-        }])->find(Auth::id());
+        }])->with('orderRequests.order.events')->find(Auth::id());
+
         $subset = $data->orderRequests->map(function ($filter){
             return $filter->only('id','created_at','order');
         });
+
         return response($subset,200);
+    }
+
+    public function recover_order($order_user_id)
+    {
+        $user_order = UserOrder::findOrFail($order_user_id);
+
+        $user_order->events()->create([
+            'event' => 'R'
+        ]);
+
+        return response(['success' => true],200);
     }
 }
