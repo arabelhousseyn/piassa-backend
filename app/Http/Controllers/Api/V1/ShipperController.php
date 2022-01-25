@@ -65,4 +65,16 @@ class ShipperController extends Controller
         ]);
         return response(['success' => true],200);
     }
+
+    public function get_recovery_orders()
+    {
+        $data = Shipper::with('orderRequests.order.items.item.request.request.informations')->
+        with(['orderRequests.order' => function($query){
+            return $query->whereNotNull('confirmed_at');
+        }])->find(Auth::id());
+        $subset = $data->orderRequests->map(function ($filter){
+            return $filter->only('id','created_at','order');
+        });
+        return response($subset,200);
+    }
 }
