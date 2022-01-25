@@ -90,4 +90,30 @@ class ShipperController extends Controller
 
         return response(['success' => true],200);
     }
+
+    public function get_delivery_orders()
+    {
+        $data = Shipper::with('orderRequests.order.items.item.request.request.informations')->
+        with(['orderRequests.order' => function($query){
+            return $query->whereNotNull('confirmed_at');
+        }])->with('orderRequests.order.events')->with('orderRequests.order.user.profile')
+            ->with('orderRequests.order.user.locations')->find(Auth::id());
+
+        $subset = $data->orderRequests->map(function ($filter){
+            return $filter->only('id','created_at','order');
+        });
+
+        return response($subset,200);
+    }
+
+    public function delivery_order($order_user_id)
+    {
+        $user_order = UserOrder::findOrFail($order_user_id);
+
+        $user_order->events()->create([
+            'event' => 'D'
+        ]);
+
+        return response(['success' => true],200);
+    }
 }
