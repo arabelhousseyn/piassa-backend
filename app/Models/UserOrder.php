@@ -34,8 +34,13 @@ class UserOrder extends Model
         return $this->hasMany(UserOrderEvent::class);
     }
 
-    public function shipper_user_order()
+    public function shipperUserOrder()
     {
         return $this->hasMany(ShipperUserOrder::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class,'user_id')->withDefault();
     }
 }
