@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\{UserCart,UserOrder,User,Shipper};
 use Illuminate\Support\Carbon;
 use function PHPUnit\Framework\isEmpty;
-
+use App\Events\NewOrderEvent;
 class UserOrderController extends Controller
 {
 
@@ -83,6 +83,8 @@ class UserOrderController extends Controller
                         ]);
                     }
                 }
+                $data = UserOrder::with('shipperUserOrder','items')->find($user_order->id);
+                event(new NewOrderEvent($data));
             });
 
 
