@@ -85,6 +85,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::prefix('/shipper')->group(function (){
         Route::get('order_requests',[ShipperController::class,'index']);
         Route::get('count_order_by_type/{types}',[ShipperController::class,'count_orders_by_delivery_type']);
+        Route::put('confirm_order/{order_user_id}',[ShipperController::class,'confirm_order'])->whereNumber('order_user_id');
     });
 
     Route::apiResources([

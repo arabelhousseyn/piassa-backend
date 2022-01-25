@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Models\{Shipper};
+use App\Models\{Shipper,UserOrder};
 use Illuminate\Support\Str;
+use Illuminate\Support\Carbon;
 class ShipperController extends Controller
 {
     public function index()
@@ -41,7 +42,27 @@ class ShipperController extends Controller
                 'count' => $count
             ];
         }
-        return $final;
+        return response($final,200);
+    }
 
+    public function confirm_order($order_user_id)
+    {
+        $check = UserOrder::find($order_user_id);
+        if($check->confirmed_at !== null)
+        {
+            $message = [
+                'message' => [
+                    'errors' => [
+                        'Commande déjà confirmée.'
+                    ]
+                ]
+            ];
+            return response($message,403);
+        }
+
+        UserOrder::whereId($order_user_id)->updateOrFail([
+            'confirmed_at' => Carbon::now()
+        ]);
+        return response(['success' => true],200);
     }
 }
