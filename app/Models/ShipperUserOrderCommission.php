@@ -21,4 +21,9 @@ class ShipperUserOrderCommission extends Model
         'created_at',
         'deleted_at'
     ];
+
+    public function userOrder()
+    {
+        return $this->belongsTo(ShipperUserOrder::class,'shipper_user_order_id')->withDefault();
+    }
 }

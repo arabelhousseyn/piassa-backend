@@ -19,6 +19,7 @@ class CreateShipperUserOrderCommissionsTable extends Migration
             $table->string('start_coordination');
             $table->string('end_coordination')->nullable();
             $table->double('amount')->nullable();
+            $table->unique(['shipper_user_order_id']);
             $table->softDeletes();
             $table->timestamps();
         });

@@ -19,4 +19,9 @@ class CompanyCommission extends Model
         'updated_at',
         'deleted_at'
     ];
+
+    public function userOrder()
+    {
+        return $this->belongsTo(UserOrder::class,'user_order_id')->withDefault();
+    }
 }

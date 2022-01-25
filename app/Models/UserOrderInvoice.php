@@ -6,27 +6,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class ShipperUserOrder extends Model
+class UserOrderInvoice extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'user_order_id',
-        'shipper_id'
+        'path'
     ];
 
     protected $hidden = [
         'updated_at',
         'deleted_at'
     ];
-
-    public function order()
-    {
-        return $this->belongsTo(UserOrder::class,'user_order_id')->withDefault();
-    }
-
-    public function commission()
-    {
-        return $this->hasOne(ShipperUserOrderCommission::class);
-    }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCompanyCommissionsTable extends Migration
+class CreateUserOrderInvoicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateCompanyCommissionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('company_commissions', function (Blueprint $table) {
+        Schema::create('user_order_invoices', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_order_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->double('amount');
+            $table->string('path');
             $table->unique(['user_order_id']);
             $table->softDeletes();
             $table->timestamps();
@@ -30,6 +30,6 @@ class CreateCompanyCommissionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('company_commissions');
+        Schema::dropIfExists('user_order_invoices');
     }
 }
