@@ -104,12 +104,22 @@ class SellerController extends Controller
 
     public function to_cash()
     {
+        $final  = [];
         $seller = Seller::with(['requests'=> function($query){
             return $query->whereNotNull('suggest_him_at');
         }])->with(['requests.suggestion' => function($query){
-            return $query->whereNotNull('taken_at');
-        }])->with('requests.suggestion.ordred.order.shipperUserOrder')->find(Auth::id());
-        return response($seller->requests,200);
+            return $query->whereNotNull('delivred_at');
+        }])->with('requests.suggestion.ordred.order.shipperUserOrder.order',
+            'requests.suggestion.ordred.order.items.item.request.request.informations')
+            ->with('requests.suggestion.ordred.order.events')->find(Auth::id());
+
+        foreach ($seller->requests as $value) {
+            if(count($value->suggestion->ordred->order->events) == 1)
+            {
+                $final[] = $value;
+            }
+        }
+        return response($final,200);
     }
 
     public function cash()
@@ -120,10 +130,11 @@ class SellerController extends Controller
         }])->with(['requests.suggestion' => function($query){
             return $query->whereNotNull('delivred_at');
         }])->with('requests.suggestion.ordred.order.shipperUserOrder.order',
-        'requests.suggestion.ordred.order.items.item.request.request.informations')->find(Auth::id());
+        'requests.suggestion.ordred.order.items.item.request.request.informations')
+            ->with('requests.suggestion.ordred.order.events')->find(Auth::id());
 
         foreach ($seller->requests as $value) {
-            if($value->suggest_him_at !== null)
+            if(count($value->suggestion->ordred->order->events) == 2)
             {
                 $final[] = $value;
             }

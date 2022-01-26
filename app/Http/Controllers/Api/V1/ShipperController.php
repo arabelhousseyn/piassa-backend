@@ -69,16 +69,20 @@ class ShipperController extends Controller
 
     public function get_recovery_orders()
     {
+        $final = [];
         $data = Shipper::with('orderRequests.order.items.item.request.request.informations')->
         with(['orderRequests.order' => function($query){
             return $query->whereNotNull('confirmed_at');
         }])->with('orderRequests.order.events')->find(Auth::id());
 
-        $subset = $data->orderRequests->map(function ($filter){
-            return $filter->only('id','created_at','order');
-        });
+        foreach ($data->orderRequests as $value) {
+            if(count($value->order->events) == 0)
+            {
+                $final[] = $value;
+            }
+        }
 
-        return response($subset,200);
+        return response($final,200);
     }
 
     public function recover_order($order_user_id,$coord)
@@ -114,17 +118,21 @@ class ShipperController extends Controller
 
     public function get_delivery_orders()
     {
+        $final = [];
         $data = Shipper::with('orderRequests.order.items.item.request.request.informations')->
         with(['orderRequests.order' => function($query){
             return $query->whereNotNull('confirmed_at');
         }])->with('orderRequests.order.events')->with('orderRequests.order.user.profile')
             ->with('orderRequests.order.user.locations')->find(Auth::id());
 
-        $subset = $data->orderRequests->map(function ($filter){
-            return $filter->only('id','created_at','order');
-        });
+        foreach ($data->orderRequests as $value) {
+            if(count($value->order->events) == 1)
+            {
+                $final[] = $value;
+            }
+        }
 
-        return response($subset,200);
+        return response($final,200);
     }
 
     public function delivery_order($order_user_id,$coord)
@@ -200,10 +208,14 @@ class ShipperController extends Controller
 
     public function shipper_commissions()
     {
+        $final = [];
         $shipper = Shipper::with('orderRequests.commission','orderRequests.order.items.item.request.request.informations')->find(Auth::id());
-        $subset = $shipper->orderRequests->map(function ($query){
-            return $query->only('commission','order');
-        });
-        return response($subset,200);
+        foreach ($shipper->orderRequests as $value) {
+            if($value->commission->amount !== null)
+            {
+                $final[] = $value;
+            }
+        }
+        return response($final,200);
     }
 }
