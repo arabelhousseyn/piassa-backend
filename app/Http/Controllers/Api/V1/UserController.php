@@ -18,14 +18,21 @@ class UserController extends Controller
 
     public function list_suggestions_request($request_id)
     {
+        $final = [];
         $data = UserRequest::with(['suggestions' => function($query){
                 return $query->whereNotNull('suggest_him_at');
             }])->with(['suggestions.suggestion' => function($query){
             return $query->whereNull('taken_at');
         }])->whereId($request_id)->first();
 
+        foreach ($data->suggestions as $value) {
+            if($value->suggest_him_at == null)
+            {
+                $final[] = $value;
+            }
+        }
 
-        return response($data,200);
+        return response($final,200);
     }
 
     public function user_list_requests_by_vehicle($user_vehicle_id)

@@ -101,4 +101,33 @@ class SellerController extends Controller
             return response($message,403);
         }
     }
+
+    public function to_cash()
+    {
+        $seller = Seller::with(['requests'=> function($query){
+            return $query->whereNotNull('suggest_him_at');
+        }])->with(['requests.suggestion' => function($query){
+            return $query->whereNotNull('taken_at');
+        }])->with('requests.suggestion.ordred.order.shipperUserOrder')->find(Auth::id());
+        return response($seller->requests,200);
+    }
+
+    public function cash()
+    {
+        $final  = [];
+        $seller = Seller::with(['requests'=> function($query){
+            return $query->whereNotNull('suggest_him_at');
+        }])->with(['requests.suggestion' => function($query){
+            return $query->whereNotNull('delivred_at');
+        }])->with('requests.suggestion.ordred.order.shipperUserOrder.order',
+        'requests.suggestion.ordred.order.items.item.request.request.informations')->find(Auth::id());
+
+        foreach ($seller->requests as $value) {
+            if($value->suggest_him_at !== null)
+            {
+                $final[] = $value;
+            }
+        }
+        return response($final,200);
+    }
 }
