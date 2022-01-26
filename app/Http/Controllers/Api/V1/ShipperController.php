@@ -8,8 +8,10 @@ use KMLaravel\GeographicalCalculator\Facade\GeoFacade;
 use App\Models\{Shipper, SellerSuggestion, UserOrder,ShipperUserOrder};
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
+use App\traits\{CalculateCommissionShipperTrait,CalculateCommissionFactoryTrait};
 class ShipperController extends Controller
 {
+    use CalculateCommissionShipperTrait,CalculateCommissionFactoryTrait;
     public function index()
     {
         $data = Shipper::with('orderRequests.order.items.item.request.request.informations')->
@@ -194,33 +196,5 @@ class ShipperController extends Controller
             }
         }
         return response($final,200);
-    }
-
-    private function CalculateCommissionShipper($distance, $type)
-    {
-        $calculated = 0;
-        $km = $distance['1-2']['km'];
-
-        if($km <= Shipper::KM)
-        {
-            $calculated = 500;
-        }else{
-            $rest = $km - Shipper::KM;
-            $calculated = round($rest) * Shipper::PRICE_KM;
-        }
-
-        switch ($type)
-        {
-            case 'E' :
-                $calculated += 500;
-                break;
-        }
-
-        return $calculated;
-    }
-
-    private function CalculateComissionFactory($user_order_id)
-    {
-
     }
 }
