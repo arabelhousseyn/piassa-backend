@@ -47,7 +47,7 @@ class RequestUserController extends Controller
             $operation = UserRequest::create([
                 'user_vehicle_id' => $request->user_vehicle_id,
                 'qt' => $request->qt,
-                'type' => $request->type
+                'type' => $request->type_id
             ]);
 
             foreach ($data as $key => $value) {
@@ -71,7 +71,7 @@ class RequestUserController extends Controller
                 {
                     foreach ($seller->jobs as $job)
                     {
-                        if($job->type == Str::upper($operation->type))
+                        if($job->type_id == Str::upper($operation->type_id))
                         {
                             $open = true;
                         }
