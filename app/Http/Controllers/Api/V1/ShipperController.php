@@ -60,7 +60,7 @@ class ShipperController extends Controller
             return response($message,403);
         }
 
-        UserOrder::whereId($order_user_id)->updateOrFail([
+        UserOrder::whereId($order_user_id)->update([
             'confirmed_at' => Carbon::now()
         ]);
         return response(['success' => true],200);
