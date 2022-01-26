@@ -12,6 +12,10 @@ use Laravel\Sanctum\HasApiTokens;
 class Shipper extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
+    const KM = 16;
+    const S = 0;
+    const E = 500;
+    const PRICE_KM = 30;
 
     /**
      * The attributes that are mass assignable.

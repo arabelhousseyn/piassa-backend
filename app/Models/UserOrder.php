@@ -36,7 +36,7 @@ class UserOrder extends Model
 
     public function shipperUserOrder()
     {
-        return $this->hasMany(ShipperUserOrder::class);
+        return $this->hasOne(ShipperUserOrder::class);
     }
 
     public function user()

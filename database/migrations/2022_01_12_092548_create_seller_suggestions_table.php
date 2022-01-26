@@ -20,6 +20,7 @@ class CreateSellerSuggestionsTable extends Migration
             $table->double('price');
             $table->date('available_at');
             $table->timestamp('taken_at')->nullable();
+            $table->timestamp('delivered_at')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

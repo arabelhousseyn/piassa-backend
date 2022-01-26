@@ -87,9 +87,9 @@ Route::middleware('auth:sanctum')->group(function(){
         Route::get('count_order_by_type/{types}',[ShipperController::class,'count_orders_by_delivery_type']);
         Route::put('confirm_order/{order_user_id}',[ShipperController::class,'confirm_order'])->whereNumber('order_user_id');
         Route::get('recovery_orders',[ShipperController::class,'get_recovery_orders']);
-        Route::get('confirm_recover_order/{order_user_id}',[ShipperController::class,'recover_order'])->whereNumber('order_user_id');
+        Route::get('confirm_recover_order/{order_user_id}/{coord}',[ShipperController::class,'recover_order'])->whereNumber('order_user_id');
         Route::get('delivery_orders',[ShipperController::class,'get_delivery_orders']);
-        Route::get('confirm_delivery_order/{order_user_id}',[ShipperController::class,'delivery_order'])->whereNumber('order_user_id');
+        Route::get('confirm_delivery_order/{order_user_id}/{coord}',[ShipperController::class,'delivery_order'])->whereNumber('order_user_id');
 
     });
 

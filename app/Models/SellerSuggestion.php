@@ -15,6 +15,7 @@ class SellerSuggestion extends Model
         'mark',
         'price',
         'available_at',
+        'delivered_at',
         'taken_at'
     ];
 

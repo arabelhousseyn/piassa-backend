@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Models\{Shipper, User, UserOrder};
+use KMLaravel\GeographicalCalculator\Facade\GeoFacade;
+use App\Models\{Shipper, SellerSuggestion, UserOrder,ShipperUserOrder};
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
 class ShipperController extends Controller
@@ -80,13 +81,33 @@ class ShipperController extends Controller
         return response($subset,200);
     }
 
-    public function recover_order($order_user_id)
+    public function recover_order($order_user_id,$coord)
     {
         $user_order = UserOrder::findOrFail($order_user_id);
+
+        if(count($user_order->events) > 0)
+        {
+            $message = [
+                'message' => [
+                    'errors' => [
+                        'Operation deja effectué'
+                    ]
+                ]
+            ];
+            return response($message,403);
+        }
 
         $user_order->events()->create([
             'event' => 'R'
         ]);
+
+        $shipper_user_order = $user_order->shipperUserOrder;
+        $op = ShipperUserOrder::find($shipper_user_order->id);
+         $op->commission()->create([
+            'start_coordination' => $coord
+        ]);
+
+
 
         return response(['success' => true],200);
     }
@@ -106,14 +127,74 @@ class ShipperController extends Controller
         return response($subset,200);
     }
 
-    public function delivery_order($order_user_id)
+    public function delivery_order($order_user_id,$coord)
     {
-        $user_order = UserOrder::findOrFail($order_user_id);
+        $user_order = UserOrder::with('items')->findOrFail($order_user_id);
+
+        if(count($user_order->events) > 1)
+        {
+            $message = [
+                'message' => [
+                    'errors' => [
+                        'Operation deja effectué'
+                    ]
+                ]
+            ];
+            return response($message,403);
+        }
 
         $user_order->events()->create([
             'event' => 'D'
         ]);
 
+        $shipper_user_order = $user_order->shipperUserOrder;
+        $op = ShipperUserOrder::with('commission')->find($shipper_user_order->id);
+
+        $commission = $op->commission;
+        $start_coord = explode(',',$commission->start_coordination);
+        $end_coord = explode(',',$coord);
+
+        $distance = GeoFacade::setPoint([doubleval($start_coord[0]), doubleval($start_coord[1])])
+            ->setOptions(['units' => ['km']])
+            ->setPoint([doubleval($end_coord[0]), doubleval($end_coord[1])])
+            ->getDistance();
+
+        $amount = $this->CalculateAmount($distance,$user_order->type_delivery);
+
+        $op->commission()->update([
+            'end_coordination' => $coord,
+            'amount' => $amount
+        ]);
+
+        foreach ($user_order->items as $item) {
+           SellerSuggestion::whereId($item->seller_suggestion_id)->update([
+                'delivered_at' => Carbon::now()
+            ]);
+        }
+
         return response(['success' => true],200);
+    }
+
+    public function CalculateAmount($distance, $type)
+    {
+        $calculated = 0;
+        $km = $distance['1-2']['km'];
+
+        if($km <= Shipper::KM)
+        {
+            $calculated = 500;
+        }else{
+            $rest = $km - Shipper::KM;
+            $calculated = round($rest) * Shipper::PRICE_KM;
+        }
+
+        switch ($type)
+        {
+            case 'E' :
+                $calculated += 500;
+                break;
+        }
+
+        return $calculated;
     }
 }
