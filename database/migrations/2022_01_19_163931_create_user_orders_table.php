@@ -18,6 +18,7 @@ class CreateUserOrdersTable extends Migration
             $table->string('ref');
             $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->enum('type_delivery',['E','S']); // E stand for Express and S stand for STANDARD
+            $table->double('amount');
             $table->string('promo_code')->nullable();
             $table->timestamp('confirmed_at')->nullable();
             $table->string('location');

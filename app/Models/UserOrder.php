@@ -14,6 +14,7 @@ class UserOrder extends Model
         'ref',
         'user_id',
         'type_delivery',
+        'amount',
         'location',
         'promo_code',
         'confirmed_at'

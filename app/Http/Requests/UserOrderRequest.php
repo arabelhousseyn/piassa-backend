@@ -26,6 +26,7 @@ class UserOrderRequest extends FormRequest
         return [
             'user_cart_id' => 'required|integer',
             'type_delivery' => 'required',
+            'amount' => 'required',
             'location' => 'required|string'
         ];
     }
@@ -37,6 +38,7 @@ class UserOrderRequest extends FormRequest
             'user_cart_id.integer' => 'Erreur veuillez réessayer.',
             'type_delivery.required' => 'Type de livraison requis.',
             'location.required' => 'Emplacement requis.',
+            'amount.required' => 'montant requis.',
             'location.string' => 'Emplacement doit être validé.',
         ];
     }

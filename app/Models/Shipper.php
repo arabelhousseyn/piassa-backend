@@ -58,5 +58,7 @@ class Shipper extends Authenticatable
     {
         return $this->hasMany(ShipperUserOrder::class);
     }
+
+
 }
 

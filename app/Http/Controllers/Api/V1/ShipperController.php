@@ -197,4 +197,13 @@ class ShipperController extends Controller
 
         return $calculated;
     }
+
+    public function shipper_commissions()
+    {
+        $shipper = Shipper::with('orderRequests.commission','orderRequests.order.items.item.request.request.informations')->find(Auth::id());
+        $subset = $shipper->orderRequests->map(function ($query){
+            return $query->only('commission','order');
+        });
+        return response($subset,200);
+    }
 }
