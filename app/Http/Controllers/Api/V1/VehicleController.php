@@ -18,9 +18,9 @@ class VehicleController extends Controller
     public function index()
     {
         $user = User::with(['vehicle'=>function($query){
-            return $query->with('sign')->orderBy('created_at','desc')->first();
+            return $query->with('sign')->orderBy('created_at','desc');
         }])->find(Auth::id());
-        return response($user->vehicle[0],200);
+        return response($user->vehicle,200);
     }
 
     /**

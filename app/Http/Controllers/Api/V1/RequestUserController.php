@@ -47,7 +47,7 @@ class RequestUserController extends Controller
             $operation = UserRequest::create([
                 'user_vehicle_id' => $request->user_vehicle_id,
                 'qt' => $request->qt,
-                'type' => $request->type_id
+                'type_id' => $request->type_id
             ]);
 
             foreach ($data as $key => $value) {
