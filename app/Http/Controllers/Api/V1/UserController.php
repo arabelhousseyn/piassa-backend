@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Models\{UserRequest};
+use http\Env\Response;
+use App\Models\{UserRequest,UserOrder};
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -46,5 +47,23 @@ class UserController extends Controller
         $suggestions = UserRequest::with('suggestions')->find($request_id);
 
         return response(['count' => count($suggestions->suggestions)],200);
+    }
+
+    public function check_user_order($user_order_id)
+    {
+        $check = UserOrder::find($user_order_id);
+        if($check)
+        {
+            return response(['success' => true],200);
+        }else{
+            $message = [
+                'message' => [
+                    'errors' => [
+                        'Commande non valide'
+                    ]
+                ]
+            ];
+            return response($message,403);
+        }
     }
 }

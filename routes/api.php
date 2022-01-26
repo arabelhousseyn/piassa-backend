@@ -52,7 +52,6 @@ Route::prefix('shipper')->group(function (){
 Route::middleware('auth:sanctum')->group(function(){
 
     Route::prefix('/user')->group(function(){
-
         Route::get('insert_location/{location?}',[UserController::class,'insert_location']);
         Route::get('list_suggestions_request/{request_id}',[UserController::class,'list_suggestions_request'])->whereNumber('request_id');
         Route::get('user_list_requests_by_vehicle/{user_vehicle_id}',[UserController::class,'user_list_requests_by_vehicle'])->whereNumber('user_vehicle_id');
@@ -68,6 +67,7 @@ Route::middleware('auth:sanctum')->group(function(){
 
         // order
         Route::prefix('order')->group(function(){
+            Route::get('check_order/{user_order_id}',[UserController::class,'check_user_order'])->whereNumber('user_order_id');
             Route::get('index',[UserOrderController::class,'list_orders']);
             Route::get('detail/{id}',[UserOrderController::class,'order_details'])->whereNumber('id');
             Route::post('store',[UserOrderController::class,'store_order']);
