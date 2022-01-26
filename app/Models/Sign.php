@@ -13,7 +13,6 @@ class Sign extends Model
     protected $fillable = [
         'name',
         'logo',
-        'percent',
         'prefix'
     ];
 

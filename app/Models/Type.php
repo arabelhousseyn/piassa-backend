@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class SellerJob extends Model
+class Type extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'seller_id',
-        'job',
-        'type_id'
+        'name',
+        'logo',
+        'percent'
     ];
 
     protected $hidden = [

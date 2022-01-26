@@ -13,7 +13,7 @@ class UserRequest extends Model
     protected $fillable = [
         'user_vehicle_id',
         'qt',
-        'type'
+        'type_id'
     ];
 
     protected $hidden = [

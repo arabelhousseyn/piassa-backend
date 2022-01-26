@@ -17,7 +17,7 @@ class CreateUserRequestsTable extends Migration
             $table->id();
             $table->foreignId('user_vehicle_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('qt');
-            $table->enum('type',['P','C','B','PN']);
+            $table->foreignId('type_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
         });

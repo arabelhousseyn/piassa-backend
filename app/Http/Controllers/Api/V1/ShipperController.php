@@ -167,11 +167,11 @@ class ShipperController extends Controller
             ->setPoint([doubleval($end_coord[0]), doubleval($end_coord[1])])
             ->getDistance();
 
-        $amount = $this->CalculateAmount($distance,$user_order->type_delivery);
+        $amount_shipper = $this->CalculateCommissionShipper($distance,$user_order->type_delivery);
 
         $op->commission()->update([
             'end_coordination' => $coord,
-            'amount' => $amount
+            'amount' => $amount_shipper
         ]);
 
         foreach ($user_order->items as $item) {
@@ -183,7 +183,20 @@ class ShipperController extends Controller
         return response(['success' => true],200);
     }
 
-    public function CalculateAmount($distance, $type)
+    public function shipper_commissions()
+    {
+        $final = [];
+        $shipper = Shipper::with('orderRequests.commission','orderRequests.order.items.item.request.request.informations')->find(Auth::id());
+        foreach ($shipper->orderRequests as $value) {
+            if($value->commission->amount !== null)
+            {
+                $final[] = $value;
+            }
+        }
+        return response($final,200);
+    }
+
+    private function CalculateCommissionShipper($distance, $type)
     {
         $calculated = 0;
         $km = $distance['1-2']['km'];
@@ -206,16 +219,8 @@ class ShipperController extends Controller
         return $calculated;
     }
 
-    public function shipper_commissions()
+    private function CalculateComissionFactory($user_order_id)
     {
-        $final = [];
-        $shipper = Shipper::with('orderRequests.commission','orderRequests.order.items.item.request.request.informations')->find(Auth::id());
-        foreach ($shipper->orderRequests as $value) {
-            if($value->commission->amount !== null)
-            {
-                $final[] = $value;
-            }
-        }
-        return response($final,200);
+
     }
 }
