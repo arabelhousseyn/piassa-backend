@@ -40,4 +40,9 @@ class UserRequest extends Model
     {
         return $this->hasMany(SellerRequest::class);
     }
+
+    public function type()
+    {
+        return $this->belongsTo(Type::class,'type_id')->withDefault();
+    }
 }

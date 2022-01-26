@@ -21,4 +21,9 @@ class SellerJob extends Model
         'updated_at',
         'deleted_at'
     ];
+
+    public function type()
+    {
+        return $this->belongsTo(Type::class,'type_id')->withDefault();
+    }
 }
