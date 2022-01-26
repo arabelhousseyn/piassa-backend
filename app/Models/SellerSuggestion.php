@@ -30,4 +30,9 @@ class SellerSuggestion extends Model
         return $this->belongsTo(SellerRequest::class,'seller_request_id')->withDefault();
     }
 
+    public function ordred()
+    {
+        return $this->hasOne(UserOrderItem::class);
+    }
+
 }
