@@ -81,6 +81,7 @@ Route::middleware('auth:sanctum')->group(function(){
     });
 
     Route::prefix('/seller')->group(function(){
+        Route::get('store_device_token/{device_token}',[SellerController::class,'store_device_token']);
         Route::get('insert_locationn/{location?}',[SellerController::class,'insert_location']);
         Route::get('list_requests',[SellerController::class,'list_requests']);
         Route::get('count_seller_requests_by_type/{types}',[SellerController::class,'count_seller_requests_by_type']);
@@ -90,6 +91,7 @@ Route::middleware('auth:sanctum')->group(function(){
     });
 
     Route::prefix('/shipper')->group(function (){
+        Route::get('store_device_token/{device_token}',[SellerController::class,'store_device_token']);
         Route::get('order_requests',[ShipperController::class,'index']);
         Route::get('count_order_by_type/{types}',[ShipperController::class,'count_orders_by_delivery_type']);
         Route::put('confirm_order/{order_user_id}',[ShipperController::class,'confirm_order'])->whereNumber('order_user_id');

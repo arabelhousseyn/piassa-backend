@@ -197,4 +197,13 @@ class ShipperController extends Controller
         }
         return response($final,200);
     }
+
+    public function store_device_token($device_token)
+    {
+        Auth::user()->profile()->update([
+            'device_token' => $device_token
+        ]);
+
+        return response(['success' => true],200);
+    }
 }
