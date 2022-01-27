@@ -1,6 +1,6 @@
 <?php
 
-namespace App\traits;
+namespace App\Traits;
 use App\Models\UserOrder;
 trait CalculateCommissionCompanyTrait
 {

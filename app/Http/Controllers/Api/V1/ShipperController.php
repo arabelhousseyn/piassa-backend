@@ -8,7 +8,7 @@ use KMLaravel\GeographicalCalculator\Facade\GeoFacade;
 use App\Models\{Shipper, SellerSuggestion, UserOrder,ShipperUserOrder,CompanyCommission};
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
-use App\traits\{CalculateCommissionShipperTrait,CalculateCommissionCompanyTrait,GenerateOrderInvoiceTrait};
+use App\Traits\{CalculateCommissionShipperTrait,CalculateCommissionCompanyTrait,GenerateOrderInvoiceTrait};
 class ShipperController extends Controller
 {
     use CalculateCommissionShipperTrait,CalculateCommissionCompanyTrait,GenerateOrderInvoiceTrait;
