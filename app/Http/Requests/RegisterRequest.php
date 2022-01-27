@@ -25,7 +25,7 @@ class RegisterRequest extends FormRequest
     {
         return [
             'full_name' => 'required',
-            'phone' => 'required|digits:10',
+            'phone' => 'required|digits:10|unique:users',
             'province_id' => 'required',
             'gender' => 'required',
             'password' => 'required|confirmed|min:8',
@@ -38,6 +38,7 @@ class RegisterRequest extends FormRequest
         return [
             'full_name.required' => 'Nom complet requis.',
             'phone.required' => 'Téléphone requis.',
+            'phone.unique' => 'Téléphone déjà utilisé.',
             'phone.digits' => 'Le numéro de téléphone doit être composé de 10 chiffres.',
             'province_id.required' => 'Willaya requis.',
             'gender' => 'Le sexe requis.',
