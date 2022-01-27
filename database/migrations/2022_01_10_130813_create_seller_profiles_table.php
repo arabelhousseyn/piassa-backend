@@ -20,6 +20,7 @@ class CreateSellerProfilesTable extends Migration
             $table->string('last_name');
             $table->string('commercial_name');
             $table->string('location')->nullable();
+            $table->string('device_token')->nullable();
             $table->unique(['seller_id']);
             $table->softDeletes();
             $table->timestamps();

@@ -15,6 +15,7 @@ class SellerProfile extends Model
         'first_name',
         'last_name',
         'commercial_name',
+        'device_token',
         'location'
     ];
 
