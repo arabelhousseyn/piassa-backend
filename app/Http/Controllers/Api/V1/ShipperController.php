@@ -171,7 +171,7 @@ class ShipperController extends Controller
 
         $amount_shipper = $this->CalculateCommissionShipper($distance,$user_order->type_delivery);
         $amount_company = $this->CalculateCommissionCompany($user_order->id);
-        $path_invoice =   $this->generate($user_order->id);
+        $path_invoice =   $this->generateInvoicePdf($user_order->id);
 
 
         $user_order->invoice()->create([

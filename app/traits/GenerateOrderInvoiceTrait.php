@@ -12,7 +12,7 @@ use Konekt\PdfInvoice\InvoicePrinter;
 
 trait GenerateOrderInvoiceTrait
 {
-    public function generate($user_order_id)
+    public function generateInvoicePdf($user_order_id)
     {
         $user_order = UserOrder::with('items.item.request.request','user.profile')->find($user_order_id);
 
