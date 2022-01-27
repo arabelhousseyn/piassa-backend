@@ -14,6 +14,7 @@ class ShipperProfile extends Model
         'shipper_id',
         'province_id',
         'first_name',
+        'device_token',
         'last_name'
     ];
 

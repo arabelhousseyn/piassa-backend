@@ -19,6 +19,7 @@ class CreateShipperProfilesTable extends Migration
             $table->foreignId('province_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('first_name');
             $table->string('last_name');
+            $table->string('device_token')->nullable();
             $table->unique(['shipper_id']);
             $table->softDeletes();
             $table->timestamps();
