@@ -14,6 +14,7 @@ class UserProfile extends Model
         'user_id',
         'province_id',
         'full_name',
+        'device_token',
         'gender'
     ];
 

@@ -30,6 +30,7 @@ class RegisterController extends Controller
                 'province_id' => $request->province_id,
                 'full_name' => $request->full_name,
                 'gender' => $request->gender,
+                'device_token' => (strlen($request->device_token) == 0) ? null : $request->device_token
             ]);
 
             $user->locations()->create([

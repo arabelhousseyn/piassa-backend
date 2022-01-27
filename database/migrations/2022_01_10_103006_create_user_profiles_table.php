@@ -19,6 +19,7 @@ class CreateUserProfilesTable extends Migration
             $table->foreignId('province_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('full_name');
             $table->enum('gender',['M','w']);
+            $table->string('device_token')->nullable();
             $table->unique(['user_id']);
             $table->softDeletes();
             $table->timestamps();
