@@ -5,13 +5,13 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use KMLaravel\GeographicalCalculator\Facade\GeoFacade;
-use App\Models\{Shipper, SellerSuggestion, UserOrder,ShipperUserOrder};
+use App\Models\{Shipper, SellerSuggestion, UserOrder,ShipperUserOrder,CompanyCommission};
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
-use App\traits\{CalculateCommissionShipperTrait,CalculateCommissionCompanyTrait};
+use App\traits\{CalculateCommissionShipperTrait,CalculateCommissionCompanyTrait,GenerateOrderInvoiceTrait};
 class ShipperController extends Controller
 {
-    use CalculateCommissionShipperTrait,CalculateCommissionCompanyTrait;
+    use CalculateCommissionShipperTrait,CalculateCommissionCompanyTrait,GenerateOrderInvoiceTrait;
     public function index()
     {
         $data = Shipper::with('orderRequests.order.items.item.request.request.informations')->
@@ -171,10 +171,21 @@ class ShipperController extends Controller
 
         $amount_shipper = $this->CalculateCommissionShipper($distance,$user_order->type_delivery);
         $amount_company = $this->CalculateCommissionCompany($user_order->id);
+        $path_invoice =   $this->generate($user_order->id);
+
+
+        $user_order->invoice()->create([
+            'path' => $path_invoice
+        ]);
 
         $op->commission()->update([
             'end_coordination' => $coord,
             'amount' => $amount_shipper
+        ]);
+
+        CompanyCommission::create([
+            'user_order_id' => $user_order->id,
+            'amount' => $amount_company
         ]);
 
         foreach ($user_order->items as $item) {

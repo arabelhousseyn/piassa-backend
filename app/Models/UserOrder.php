@@ -25,6 +25,10 @@ class UserOrder extends Model
         'deleted_at'
     ];
 
+    protected $casts = [
+        'amount' => 'double'
+    ];
+
     public function items()
     {
         return $this->hasMany(UserOrderItem::class);

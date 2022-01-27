@@ -21,4 +21,8 @@ class Type extends Model
         'updated_at',
         'deleted_at'
     ];
+
+    protected $casts = [
+        'percent' => 'integer'
+    ];
 }

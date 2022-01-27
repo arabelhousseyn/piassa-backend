@@ -25,6 +25,10 @@ class SellerSuggestion extends Model
         'deleted_at'
     ];
 
+    protected $casts = [
+        'price' => 'double'
+    ];
+
     public function request()
     {
         return $this->belongsTo(SellerRequest::class,'seller_request_id')->withDefault();
