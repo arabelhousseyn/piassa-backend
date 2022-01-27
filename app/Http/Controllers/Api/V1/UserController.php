@@ -38,7 +38,7 @@ class UserController extends Controller
 
     public function user_list_requests_by_vehicle($user_vehicle_id)
     {
-        $requests = UserRequest::with('informations')->where('user_vehicle_id',$user_vehicle_id)->get();
+        $requests = UserRequest::with('informations','type:id,name')->where('user_vehicle_id',$user_vehicle_id)->get();
         return response($requests,200);
     }
 
