@@ -31,22 +31,27 @@ use App\Http\Controllers\Api\V1\{
 Route::apiResource('provinces',ProvinceController::class);
 
 
-// Auth and register for user
-Route::prefix('user')->group(function(){
-    Route::post('login',LoginController::class);
-    Route::post('register',RegisterController::class);
-});
+
+Route::middleware(['throttle:login'])->group(function (){
+
+    // Auth and register for user
+    Route::prefix('user')->group(function(){
+        Route::post('login',LoginController::class);
+        Route::post('register',RegisterController::class);
+    });
 
 // auth for seller
 
-Route::prefix('seller')->group(function(){
-    Route::post('login',LoginSellerController::class);
-});
+    Route::prefix('seller')->group(function(){
+        Route::post('login',LoginSellerController::class);
+    });
 
 // auth for shipper
 
-Route::prefix('shipper')->group(function (){
-    Route::post('login',LoginShipperController::class);
+    Route::prefix('shipper')->group(function (){
+        Route::post('login',LoginShipperController::class);
+    });
+
 });
 
 Route::middleware('auth:sanctum')->group(function(){
