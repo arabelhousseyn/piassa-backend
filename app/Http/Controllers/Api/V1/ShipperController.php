@@ -8,10 +8,10 @@ use KMLaravel\GeographicalCalculator\Facade\GeoFacade;
 use App\Models\{Shipper, SellerSuggestion, UserOrder,ShipperUserOrder};
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
-use App\traits\{CalculateCommissionShipperTrait,CalculateCommissionFactoryTrait};
+use App\traits\{CalculateCommissionShipperTrait,CalculateCommissionCompanyTrait};
 class ShipperController extends Controller
 {
-    use CalculateCommissionShipperTrait,CalculateCommissionFactoryTrait;
+    use CalculateCommissionShipperTrait,CalculateCommissionCompanyTrait;
     public function index()
     {
         $data = Shipper::with('orderRequests.order.items.item.request.request.informations')->
@@ -170,6 +170,7 @@ class ShipperController extends Controller
             ->getDistance();
 
         $amount_shipper = $this->CalculateCommissionShipper($distance,$user_order->type_delivery);
+        $amount_company = $this->CalculateCommissionCompany($user_order->id);
 
         $op->commission()->update([
             'end_coordination' => $coord,
