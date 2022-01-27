@@ -44,9 +44,17 @@ class UserController extends Controller
 
     public function count_suggestions_request($request_id)
     {
+        $count = 0;
         $suggestions = UserRequest::with('suggestions')->find($request_id);
 
-        return response(['count' => count($suggestions->suggestions)],200);
+        foreach ($suggestions->suggestions as $suggestion) {
+            if($suggestion->suggest_him_at !== null)
+            {
+                $count++;
+            }
+        }
+
+        return response(['count' => $count],200);
     }
 
     public function check_user_order($user_order_id)

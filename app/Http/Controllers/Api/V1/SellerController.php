@@ -40,7 +40,7 @@ class SellerController extends Controller
 
     public function count_seller_requests_by_type($types)
     {
-        $seller = Seller::with('requests.request')->find(Auth::id());
+        $seller = Seller::with('requests.request.type')->find(Auth::id());
         $data = [];
         $extract = explode(',',$types);
         foreach ($extract as $type)
@@ -48,13 +48,13 @@ class SellerController extends Controller
             $count = 0;
             foreach ($seller->requests as $request)
             {
-                if($request->request->type == Str::upper($type))
+                if($request->request->type_id == Str::upper($type))
                 {
                     $count++;
                 }
             }
             $data[] = [
-                'type' => $type,
+                'type' => $request->request->type,
                 'count' => $count
             ];
         }
@@ -114,9 +114,12 @@ class SellerController extends Controller
             ->with('requests.suggestion.ordred.order.events')->find(Auth::id());
 
         foreach ($seller->requests as $value) {
-            if(count($value->suggestion->ordred->order->events) == 1)
+            if(@$value->suggestion->ordred->order->id)
             {
-                $final[] = $value;
+                if(count($value->suggestion->ordred->order->events) == 1)
+                {
+                    $final[] = $value;
+                }
             }
         }
         return response($final,200);
@@ -134,9 +137,12 @@ class SellerController extends Controller
             ->with('requests.suggestion.ordred.order.events')->find(Auth::id());
 
         foreach ($seller->requests as $value) {
-            if(count($value->suggestion->ordred->order->events) == 2)
+            if(@$value->suggestion->ordred->order->id)
             {
-                $final[] = $value;
+                if(count($value->suggestion->ordred->order->events) == 2)
+                {
+                    $final[] = $value;
+                }
             }
         }
         return response($final,200);
