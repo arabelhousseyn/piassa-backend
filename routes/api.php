@@ -80,6 +80,11 @@ Route::middleware('auth:sanctum')->group(function(){
 
     });
 
+    Route::prefix('vehicle')->group(function (){
+        Route::post('store_control',[VehicleController::class,'store_control']);
+        Route::put('update_control/{user_vehicle_id}',[VehicleController::class,'update_control'])->whereNumber('user_vehicle_id');
+    });
+
     Route::prefix('/seller')->group(function(){
         Route::get('store_device_token/{device_token}',[SellerController::class,'store_device_token']);
         Route::get('insert_locationn/{location?}',[SellerController::class,'insert_location']);

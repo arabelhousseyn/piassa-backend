@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Exceptions\VehicleNotFoundException;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateUserVehicleControlRequest;
+use App\Http\Requests\UserVehicleControlRequest;
 use App\Http\Requests\VehicleRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\{User,Sign};
+use App\Models\{User,Sign,UserVehicle};
 use Illuminate\Support\Str;
 class VehicleController extends Controller
 {
@@ -119,5 +122,36 @@ class VehicleController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function store_control(UserVehicleControlRequest $request)
+    {
+        if($request->validated())
+        {
+            try {
+                $user_vehicle = UserVehicle::findOrFail($request->user_vehicle_id);
+                $user_vehicle->control()->create($request->only(['technical_control','assurance','emptying']));
+                return response(['success' => true],200);
+            }catch (\Exception $e)
+            {
+                return response(['message' => 'not found'],404);
+            }
+
+        }
+    }
+
+    public function update_control($user_vehicle_id,UpdateUserVehicleControlRequest $request)
+    {
+        if($request->validated())
+        {
+            try {
+                $user_vehicle = UserVehicle::findOrFail($user_vehicle_id);
+                $user_vehicle->control()->update($request->only(['technical_control','assurance','emptying']));
+                return response(['success' => true],200);
+            }catch (\Exception $e)
+            {
+                return response(['message' => 'not found'],404);
+            }
+        }
     }
 }
