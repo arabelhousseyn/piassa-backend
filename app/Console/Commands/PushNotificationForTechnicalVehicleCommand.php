@@ -3,22 +3,23 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Spatie\Permission\Models\Role;
-class GenerateRoles extends Command
+use App\Traits\PushNotificationVehicleControlTrait;
+class PushNotificationForTechnicalVehicleCommand extends Command
 {
+    use PushNotificationVehicleControlTrait;
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'generate:roles';
+    protected $signature = 'vehicle:daily';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command to generate roles';
+    protected $description = 'push notification command for technical vehicle';
 
     /**
      * Create a new command instance.
@@ -37,10 +38,7 @@ class GenerateRoles extends Command
      */
     public function handle()
     {
-
-        Role::create(['name' => 'p']);
-        Role::create(['name' => 'c']);
-        Role::create(['name' => 'A']);
-        return $this->info('roles created.');
+        $this->push();
+        return $this->info('work');
     }
 }
