@@ -38,7 +38,7 @@ class PushNotificationForTechnicalVehicleCommand extends Command
      */
     public function handle()
     {
-        $this->push();
+        $this->index();
         return $this->info('work');
     }
 }

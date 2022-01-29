@@ -21,4 +21,9 @@ class UserVehicleControl extends Model
         'created_at',
         'deleted_at'
     ];
+
+    public function vehicle()
+    {
+        return $this->belongsTo(UserVehicle::class,'user_vehicle_id')->withDefault();
+    }
 }
