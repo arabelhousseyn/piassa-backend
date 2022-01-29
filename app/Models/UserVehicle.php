@@ -34,4 +34,9 @@ class UserVehicle extends Model
     {
         return $this->belongsTo(Sign::class,'sign_id')->withDefault();
     }
+
+    public function control()
+    {
+        return $this->hasOne(UserVehicleControl::class);
+    }
 }
