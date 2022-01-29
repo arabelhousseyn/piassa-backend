@@ -18,19 +18,19 @@ trait PushNotificationVehicleControlTrait
             if($days_in_technical_control  == 2)
             {
                 $message = 'Vérifier votre contrôle technique pour véhicule ' . $control->vehicle->model;
-                $this->push('Contrôle technique',$message,$control->vehicle->user->id);
+                $this->push('Piassa',$message,$control->vehicle->user->id);
             }
 
             if($days_in_assurance  == 2)
             {
                 $message = 'Vérifier votre assurance pour véhicule ' . $control->vehicle->model;
-                $this->push('Assurance',$message,$control->vehicle->user->id);
+                $this->push('Piassa',$message,$control->vehicle->user->id);
             }
 
             if($days_in_emptying  == 2)
             {
                 $message = 'Vérifier votre vidange pour véhicule ' . $control->vehicle->model;
-                $this->push('Vidange',$message,$control->vehicle->user->id);
+                $this->push('Piassa',$message,$control->vehicle->user->id);
             }
         }
     }
