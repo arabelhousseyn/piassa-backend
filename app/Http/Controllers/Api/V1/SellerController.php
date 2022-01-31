@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 
 use App\Http\Requests\StoreSellerSuggestionRequest;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 use App\Models\{Seller,SellerRequest};
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -88,7 +90,7 @@ class SellerController extends Controller
                 }
                 $data = SellerRequest::with('suggestion')->find($request->seller_request_id);
                 event(new NewSuggestionEvent($data));
-                return response(['success' => true],200);
+                return response(['success' => true],201);
 
             }else{
             $message = [
@@ -148,12 +150,31 @@ class SellerController extends Controller
         return response($final,200);
     }
 
-    public function store_device_token($device_token)
+    public function store_device_token(Request $request)
     {
-        Auth::user()->profile()->update([
-            'device_token' => $device_token
-        ]);
+        $rules = [
+            'device_token' => 'required'
+        ];
+        $validator = Validator::make($request->only('device_token'),$rules);
+        if($validator->fails())
+        {
+            $message = [
+                'message' => [
+                    'errors' => [
+                        'Erreur veuillez réessayer.'
+                    ]
+                ]
+            ];
+            return response($message,403);
+        }
 
-        return response(['success' => true],200);
+        if($validator->validated())
+        {
+            Auth::user()->profile()->update([
+                'device_token' => $request->device_token
+            ]);
+
+            return response(['success' => true],200);
+        }
     }
 }

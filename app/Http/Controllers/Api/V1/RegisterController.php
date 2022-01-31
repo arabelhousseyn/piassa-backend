@@ -52,7 +52,7 @@ class RegisterController extends Controller
                     break;
             }
 
-            return response(['success' => true,'token' => $token],200);
+            return response(['success' => true,'token' => $token],201);
         }
     }
 }

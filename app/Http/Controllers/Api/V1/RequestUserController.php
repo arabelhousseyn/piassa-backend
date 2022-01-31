@@ -123,7 +123,7 @@ class RequestUserController extends Controller
 
             event(New NewRequestEvent($operation));
 
-            return response(['success' => true,'request_id' => $operation->id],200);
+            return response(['success' => true,'request_id' => $operation->id],201);
         }
     }
 

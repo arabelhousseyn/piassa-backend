@@ -67,7 +67,7 @@ trait GenerateOrderInvoiceTrait
             ->filename($user_order->user->profile->full_name . ' Youssef boudjema')
             ->addItems($items)
             ->notes($notes)
-            ->logo(public_path('vendor/invoices/sample-logo.png'))
+            ->logo(public_path('vendor/invoices/piassa-logo.png'))
             // You can additionally save generated invoice to configured disk
             ->save('invoice');
 
