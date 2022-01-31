@@ -141,8 +141,14 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'phone' => [
+            'required' => 'Téléphone requis.',
+            'digits' => 'Le numéro de téléphone doit être composé de 10 chiffres.',
+        ],
+
+        'password' => [
+            'required' => 'Mote de passe requis.',
+            'min' => 'L mot de passe doit avoir une longueur minimale de 8.',
         ],
     ],
 
