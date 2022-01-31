@@ -14,14 +14,27 @@ class UserLoginTest extends TestCase
      */
     public function test_example()
     {
-        for ($i=0;$i<6;$i++)
-        {
-            $data = [
-                'phone' => '0699687412',
-                'password' => "hocine.12333"
-            ];
-            $response = $this->post('api/user/login',$data);
-        }
+        // attempt login test
+//        for ($i=0;$i<6;$i++)
+//        {
+//            $data = [
+//                'phone' => '0699687412',
+//                'password' => "hocine.12333"
+//            ];
+//            $response = $this->post('api/user/login',$data);
+//        }
+//        $response->assertStatus(403);
+
+        // ----------------------------------------------
+
+        //wrong data test
+        $data = [
+            'phone' => '0699687412',
+            'password' => "hocine.12333"
+        ];
+        $response = $this->post('api/user/login',$data);
+
         $response->assertStatus(403);
+
     }
 }
