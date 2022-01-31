@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\{User,Seller};
+use App\Models\{Shipper, User, Seller};
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -15,5 +15,6 @@ class DatabaseSeeder extends Seeder
     {
         User::factory(10)->create();
         Seller::factory(3)->create();
+        Shipper::factory(2)->create();
     }
 }
