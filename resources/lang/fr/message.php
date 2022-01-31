@@ -4,7 +4,8 @@
 return [
 
     'not_found' => 'pas trouvé',
-    'province' => 'province'
+    'province' => 'province',
+    'incorrect' => 'Un de vos informations incorrect'
 
 
 ];

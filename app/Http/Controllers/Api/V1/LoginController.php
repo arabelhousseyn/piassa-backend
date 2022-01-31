@@ -29,7 +29,7 @@ class LoginController extends Controller
                 $message = [
                     'message' => [
                         'errors' => [
-                            'Un de vos informations incorrect'
+                            __('message.incorrect')
                         ]
                     ]
                 ];
