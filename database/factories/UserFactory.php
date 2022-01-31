@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -15,7 +16,7 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'phone' => $this->faker->phoneNumber(),
+            'phone' => $this->faker->numerify('##########'),
             'email' => $this->faker->unique()->safeEmail(),
             'otp' => null,
             'email_verified_at' => now(),
@@ -36,6 +37,22 @@ class UserFactory extends Factory
             return [
                 'email_verified_at' => null,
             ];
+        });
+    }
+
+    public function configure()
+    {
+        return $this->afterCreating(function (User $user){
+            $user->profile()->create([
+                'province_id' => 1,
+                'full_name' => $this->faker->firstNameFemale,
+                'gender' => 'W',
+                'device_token' => null,
+            ]);
+
+            $user->locations()->create([
+                'location' => '0,0'
+            ]);
         });
     }
 }
