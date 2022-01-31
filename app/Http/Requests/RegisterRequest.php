@@ -27,9 +27,10 @@ class RegisterRequest extends FormRequest
             'full_name' => 'required',
             'phone' => 'required|digits:10|unique:users',
             'province_id' => 'required',
-            'gender' => 'required',
+            'gender' => 'required|in:M,F',
             'password' => 'required|confirmed|min:8',
-            'location' => 'required'
+            'location' => 'required',
+            'has_role' => 'required'
         ];
     }
 
@@ -41,11 +42,13 @@ class RegisterRequest extends FormRequest
             'phone.unique' => 'Téléphone déjà utilisé.',
             'phone.digits' => 'Le numéro de téléphone doit être composé de 10 chiffres.',
             'province_id.required' => 'Willaya requis.',
-            'gender' => 'Le sexe requis.',
+            'gender.required' => 'Le sexe requis.',
+            'gender.in' => 'Erreur Veuillez réessayer.',
             'password.required' => 'Mote de passe requis.',
             'password.confirmed' => 'Le mot de passe ne correspond pas.',
             'password.min' => 'L mot de passe doit avoir une longueur minimale de 8',
-            'location.required' => 'Emplacement GPS requis.'
+            'location.required' => 'Emplacement GPS requis.',
+            'has_role.required' => 'Rôle requis.'
         ];
     }
 }

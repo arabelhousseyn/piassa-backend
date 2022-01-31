@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Exceptions\ProvinceNotFoundException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Models\{User,UserProfile,UserLocation};
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use App\Models\{User,Province};
 
 class RegisterController extends Controller
 {
@@ -21,6 +23,20 @@ class RegisterController extends Controller
     {
         if($request->validated())
         {
+            try {
+                $province = Province::findOrFail($request->province_id);
+            }catch (\Exception $e)
+            {
+                $message = [
+                    'message' => [
+                        'errors' => [
+                            __('message.province') .' '.  __('message.not_found')
+                        ]
+                    ]
+                ];
+                return response($message,403);
+            }
+
             $user = User::create([
                 'phone' => $request->phone,
                 'password' => Hash::make($request->password_confirmation),
