@@ -6,7 +6,8 @@ return [
     'not_found' => 'pas trouvé',
     'province' => 'province',
     'incorrect' => 'Un de vos informations incorrect',
-    'many_requests' => 'Trop de demandes réessayer plus tard.'
+    'many_requests' => 'Trop de demandes réessayer plus tard.',
+    'location_error' => 'Emplacement erroné.'
 
 
 ];

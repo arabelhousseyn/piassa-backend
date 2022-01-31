@@ -3,18 +3,40 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use http\Env\Response;
+use Illuminate\Http\Request;
 use App\Models\{UserRequest,UserOrder};
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Validator;
+use App\Rules\FilterLocation;
 class UserController extends Controller
 {
-    public function insert_location($location)
+    public function insert_location(Request $request)
     {
-        Auth::user()->locations()->create([
-            'location' => $location
-        ]);
-        return response(['success' => true],200);
+        $rules = [
+            'location' => ['required', new FilterLocation]
+        ];
+
+        $validator = Validator::make($request->only('location'),$rules);
+
+        if($validator->fails())
+        {
+            $message = [
+                'message' => [
+                    'errors' => [
+                        $validator->errors()
+                    ]
+                ]
+            ];
+            return response($message,403);
+        }
+
+        if($validator->validated())
+        {
+            Auth::user()->locations()->create([
+                'location' => $request->location
+            ]);
+            return response(['success' => true],200);
+        }
     }
 
     public function list_suggestions_request($request_id)

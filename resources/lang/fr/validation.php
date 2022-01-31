@@ -150,6 +150,10 @@ return [
             'required' => 'Mote de passe requis.',
             'min' => 'L mot de passe doit avoir une longueur minimale de 8.',
         ],
+
+        'location' => [
+            'required' => 'Emplacement requis.'
+        ]
     ],
 
     /*
