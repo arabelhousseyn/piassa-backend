@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use KMLaravel\GeographicalCalculator\Facade\GeoFacade;
 use App\Models\{Shipper, SellerSuggestion, UserOrder,ShipperUserOrder,CompanyCommission};
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
 use App\Traits\{CalculateCommissionShipperTrait,CalculateCommissionCompanyTrait,GenerateOrderInvoiceTrait};
+use Illuminate\Support\Facades\Validator;
 class ShipperController extends Controller
 {
     use CalculateCommissionShipperTrait,CalculateCommissionCompanyTrait,GenerateOrderInvoiceTrait;
@@ -210,12 +212,33 @@ class ShipperController extends Controller
         return response($final,200);
     }
 
-    public function store_device_token($device_token)
+    public function store_device_token(Request $request)
     {
-        Auth::user()->profile()->update([
-            'device_token' => $device_token
-        ]);
+        $rules = [
+            'device_token' => 'required'
+        ];
 
-        return response(['success' => true],200);
+        $validator = Validator::make($request->only('device_token'),$rules);
+
+        if($validator->fails())
+        {
+            $message = [
+                'message' => [
+                    'errors' => [
+                        'Erreur veuillez réessayer.'
+                    ]
+                ]
+            ];
+            return response($message,403);
+        }
+
+        if($validator->validated())
+        {
+            Auth::user()->profile()->update([
+                'device_token' => $request->device_token
+            ]);
+
+            return response(['success' => true],200);
+        }
     }
 }

@@ -50,14 +50,14 @@ class UserCartController extends Controller
                     $cart->items()->create([
                         'seller_suggestion_id' => $request->seller_suggestion_id
                     ]);
-                    return response(['success' => true],200);
+                    return response(['success' => true],201);
                 }else{
                     $cart = UserCart::find($carts->carts[0]->id);
 
                     $cart->items()->create([
                         'seller_suggestion_id' => $request->seller_suggestion_id
                     ]);
-                    return response(['success' => true],200);
+                    return response(['success' => true],201);
                 }
             }else{
                 $cart_info = Auth::user()->carts()->create([
@@ -69,7 +69,7 @@ class UserCartController extends Controller
                 $cart->items()->create([
                     'seller_suggestion_id' => $request->seller_suggestion_id
                 ]);
-                return response(['success' => true],200);
+                return response(['success' => true],201);
             }
         }
     }
