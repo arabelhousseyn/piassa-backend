@@ -62,7 +62,7 @@ class RouteServiceProvider extends ServiceProvider
 
         RateLimiter::for('login',function (Request $request){
             return Limit::perMinutes(5,5)->by($request->ip())->response(function (){
-                return response(['message' => 'Trop de demandes réessayer plus tard.'],429);
+                return response(['message' => __('message.many_requests') ],429);
             });
         });
     }
