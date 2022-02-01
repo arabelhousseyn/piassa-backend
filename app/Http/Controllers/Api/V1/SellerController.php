@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 
 use App\Http\Requests\StoreSellerSuggestionRequest;
+use App\Rules\FilterLocation;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\{Seller,SellerRequest};
@@ -14,17 +15,33 @@ use Illuminate\Support\Carbon;
 use App\Events\NewSuggestionEvent;
 class SellerController extends Controller
 {
-    public function insert_location($location)
+    public function insert_location(Request $request)
     {
-        $operation = Auth::user()->profile()->update([
-            'location' => $location
-        ]);
+        $rules = [
+            'location' => ['required', new FilterLocation]
+        ];
 
-        if($operation)
+        $validator = Validator::make($request->only('location'),$rules);
+
+        if($validator->fails())
         {
+            $message = [
+                'message' => [
+                    'errors' => [
+                        $validator->errors()
+                    ]
+                ]
+            ];
+            return response($message,403);
+        }
+
+        if($validator->validated())
+        {
+            Auth::user()->profile()->update([
+                'location' => $request->location
+            ]);
             return response(['success' => true],200);
         }
-        return response(['success' => false],433);
     }
 
     public function list_requests()

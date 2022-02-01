@@ -24,8 +24,7 @@ class StoreUserCartRequest extends FormRequest
     public function rules()
     {
         return [
-            'seller_suggestion_id' => 'required|integer',
-            ''
+            'seller_suggestion_id' => 'required|integer'
         ];
     }
 
