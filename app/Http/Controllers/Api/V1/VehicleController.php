@@ -117,9 +117,17 @@ class VehicleController extends Controller
     {
         if($request->validated())
         {
+                $user = User::find(Auth::id());
                 $user_vehicle = UserVehicle::find($request->user_vehicle_id);
-                $user_vehicle->control()->create($request->only(['technical_control','assurance','emptying']));
-                return response(['success' => true],201);
+
+                 if($user->can('handle_vehicle_control',$user_vehicle))
+                 {
+                   $user_vehicle->control()->update($request->only(['technical_control','assurance','emptying']));
+                   return response(['success' => true],200);
+                 }
+
+                 return response(['success' => false],403);
+
         }
     }
 
@@ -128,12 +136,25 @@ class VehicleController extends Controller
         if($request->validated())
         {
             try {
+                $user = User::find(Auth::id());
                 $user_vehicle = UserVehicle::findOrFail($user_vehicle_id);
-                $user_vehicle->control()->update($request->only(['technical_control','assurance','emptying']));
-                return response(['success' => true],200);
+                if($user->can('handle_vehicle_control',$user_vehicle))
+                {
+                    $user_vehicle->control()->update($request->only(['technical_control','assurance','emptying']));
+                    return response(['success' => true],200);
+                }
+
+                return response(['success' => false],403);
             }catch (\Exception $e)
             {
-                return response(['message' => 'not found'],404);
+                $message = [
+                    'message' => [
+                        'errors' => [
+                            __('message.vehicle_not_found')
+                        ]
+                    ]
+                ];
+                return response($message,302);
             }
         }
     }
