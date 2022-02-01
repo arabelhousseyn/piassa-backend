@@ -166,6 +166,22 @@ return [
             'required' => 'Type requis.',
             'exists' => 'Type n\'existe pas'
         ],
+        'sign_id' => [
+            'required' => 'Étiquettes de véhicule requis.',
+            'exists' => 'Étiquettes de véhicule n\'existe pas.'
+        ],
+        'model' => [
+            'required' => 'Modèle requis.'
+        ],
+        'year' => [
+            'required' => 'Année requis.'
+        ],
+        'motorization' => [
+            'required' => 'Motorisation requis.'
+        ],
+        'chassis_number' => [
+            'required' => 'N° châssis requis.'
+        ]
 
     ],
 

@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Exceptions\VehicleNotFoundException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateUserVehicleControlRequest;
 use App\Http\Requests\UserVehicleControlRequest;
 use App\Http\Requests\VehicleRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\{User,Sign,UserVehicle};
-use Illuminate\Support\Str;
+use App\Models\{User,UserVehicle};
 class VehicleController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('check.chassis')->except(['index','show','create','edit','update','destory','store_control','update_control']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -46,21 +50,6 @@ class VehicleController extends Controller
     {
         if($request->validated())
         {
-            // chassis number prefix compatible with the prefix of sign
-            $sign = Sign::find($request->sign_id);
-            if(!Str::startsWith($request->chassis_number,$sign->prefix))
-            {
-                $message = [
-                    'message' => [
-                        'errors' => [
-                            'chassis_number' => [
-                                'N° châssis incorrect'
-                            ]
-                        ]
-                    ]
-                ];
-                return response($message,403);
-            }
             Auth::user()->vehicle()->create([
               'sign_id' => $request->sign_id,
               'model' => $request->model,

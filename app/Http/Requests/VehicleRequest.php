@@ -24,22 +24,11 @@ class VehicleRequest extends FormRequest
     public function rules()
     {
         return [
-            'sign_id' => 'required',
+            'sign_id' => 'required|exists:signs,id',
             'model' => 'required',
             'year' => 'required',
             'motorization' => 'required',
             'chassis_number' => 'required'
-        ];
-    }
-
-    public function messages()
-    {
-        return [
-            'sign_id.required' => 'Étiquettes de véhicule requis.',
-            'model.required' => 'Modèle requis.',
-            'year.required' => 'Année requis.',
-            'motorization.required' => 'Motorisation requis.',
-            'chassis_number.required' => 'N° châssis requis.',
         ];
     }
 }
