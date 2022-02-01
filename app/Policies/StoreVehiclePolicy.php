@@ -20,7 +20,7 @@ class StoreVehiclePolicy
         //
     }
 
-    public function handle_vehicle_control(User $user,UserVehicle $user_vehicle)
+    public function handle_vehicle(User $user,UserVehicle $user_vehicle)
     {
         return $user->id === $user_vehicle->user_id;
     }

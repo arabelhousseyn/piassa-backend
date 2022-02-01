@@ -120,13 +120,21 @@ class VehicleController extends Controller
                 $user = User::find(Auth::id());
                 $user_vehicle = UserVehicle::find($request->user_vehicle_id);
 
-                 if($user->can('handle_vehicle_control',$user_vehicle))
+                 if($user->can('handle_vehicle',$user_vehicle))
                  {
                    $user_vehicle->control()->update($request->only(['technical_control','assurance','emptying']));
                    return response(['success' => true],200);
                  }
 
-                 return response(['success' => false],403);
+            $message = [
+                'message' => [
+                    'error' => [
+                        __('message.vehilce_error')
+                    ]
+                ]
+            ];
+
+            return response($message,403);
 
         }
     }
@@ -138,13 +146,22 @@ class VehicleController extends Controller
             try {
                 $user = User::find(Auth::id());
                 $user_vehicle = UserVehicle::findOrFail($user_vehicle_id);
-                if($user->can('handle_vehicle_control',$user_vehicle))
+                if($user->can('handle_vehicle',$user_vehicle))
                 {
                     $user_vehicle->control()->update($request->only(['technical_control','assurance','emptying']));
                     return response(['success' => true],200);
                 }
 
-                return response(['success' => false],403);
+                $message = [
+                    'message' => [
+                        'error' => [
+                            __('message.vehilce_error')
+                        ]
+                    ]
+                ];
+
+                return response($message,403);
+
             }catch (\Exception $e)
             {
                 $message = [

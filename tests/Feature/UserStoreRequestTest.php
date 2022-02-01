@@ -15,10 +15,10 @@ class UserStoreRequestTest extends TestCase
      */
     public function test_example()
     {
-        $user = User::find(11);
+        $user = User::find(116);
 
         $data = [
-            'user_vehicle_id' => '1',
+            'user_vehicle_id' => '2',
             'qt' => '2',
             'type_id' => '1',
             'mark' => 'hiho',

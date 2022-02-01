@@ -3,11 +3,7 @@
 namespace App\Services;
 
 use App\Events\NewRequestEvent;
-use App\Models\Seller;
-use App\Models\Type;
-use App\Models\User;
-use App\Models\UserRequest;
-use App\Models\UserVehicle;
+use App\Models\{UserVehicle,UserRequest,User,Seller};
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use KMLaravel\GeographicalCalculator\Facade\GeoFacade;
@@ -16,8 +12,9 @@ class RequestUserService{
 
     public function store($request)
     {
+            $user = User::find(Auth::id());
             $user_vehicle = UserVehicle::find($request->user_vehicle_id);
-            if($user_vehicle->user_id !== Auth::id())
+            if(!$user->can('handle_vehicle',$user_vehicle))
             {
                 $message = [
                     'message' => [
@@ -27,7 +24,7 @@ class RequestUserService{
                     ]
                 ];
 
-                return response($message,302);
+                return response($message,403);
             }
 
         $data = $request->except('type','user_vehicle_id');
