@@ -153,7 +153,20 @@ return [
 
         'location' => [
             'required' => 'Emplacement requis.'
-        ]
+        ],
+        'user_vehicle_id' => [
+            'required' => 'Erreur veuillez réessayer',
+            'integer' => 'Erreur veuillez réessayer.'
+        ],
+        'qt' => [
+            'required' => 'Erreur veuillez réessayer',
+            'integer' => 'Erreur veuillez réessayer.'
+        ],
+        'type_id' => [
+            'required' => 'Erreur veuillez réessayer',
+            'integer' => 'Erreur veuillez réessayer.'
+        ],
+
     ],
 
     /*

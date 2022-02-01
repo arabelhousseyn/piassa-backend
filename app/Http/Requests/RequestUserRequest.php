@@ -29,16 +29,4 @@ class RequestUserRequest extends FormRequest
             'type_id' => 'required|integer'
         ];
     }
-
-    public function messages()
-    {
-        return [
-            'user_vehicle_id.required' => 'Erreur veuillez réessayer.',
-            'user_vehicle_id.integer' => 'Erreur veuillez réessayer.',
-            'qt.required' => 'Quantité requis.',
-            'qt.integer' => 'Quantité doit être un nombre.',
-            'type_id.required' => 'Erreur veuillez réessayer.',
-            'type_id.integer' => 'Erreur veuillez réessayer.',
-        ];
-    }
 }
