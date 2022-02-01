@@ -16,8 +16,7 @@ class RequestUserService{
 
     public function store($request)
     {
-        try {
-            $user_vehicle = UserVehicle::findOrFail($request->user_vehicle_id);
+            $user_vehicle = UserVehicle::find($request->user_vehicle_id);
             if($user_vehicle->user_id !== Auth::id())
             {
                 $message = [
@@ -30,32 +29,6 @@ class RequestUserService{
 
                 return response($message,500);
             }
-        }catch (\Exception $e)
-        {
-            $message = [
-                'message' => [
-                    'error' => [
-                        __('message.vehilce_not_found')
-                    ]
-                ]
-            ];
-            return response($message,404);
-        }
-
-        try {
-            Type::findOrFail($request->type_id);
-        }catch (\Exception $e)
-        {
-            $message = [
-                'message' => [
-                    'error' => [
-                        __('message.type_not_found')
-                    ]
-                ]
-            ];
-
-            return response($message,404);
-        }
 
         $data = $request->except('type','user_vehicle_id');
 

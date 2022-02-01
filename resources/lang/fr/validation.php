@@ -155,16 +155,16 @@ return [
             'required' => 'Emplacement requis.'
         ],
         'user_vehicle_id' => [
-            'required' => 'Erreur veuillez réessayer',
-            'integer' => 'Erreur veuillez réessayer.'
+            'required' => 'Véhicule requis.',
+            'exists' => 'Véhicule n\'existe pas.'
         ],
         'qt' => [
             'required' => 'Erreur veuillez réessayer',
             'integer' => 'Erreur veuillez réessayer.'
         ],
         'type_id' => [
-            'required' => 'Erreur veuillez réessayer',
-            'integer' => 'Erreur veuillez réessayer.'
+            'required' => 'Type requis.',
+            'exists' => 'Type n\'existe pas'
         ],
 
     ],

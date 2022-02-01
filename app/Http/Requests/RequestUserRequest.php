@@ -24,9 +24,9 @@ class RequestUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_vehicle_id' => 'required|integer',
+            'user_vehicle_id' => 'required|exists:user_vehicles,id',
             'qt' => 'required|integer',
-            'type_id' => 'required|integer'
+            'type_id' => 'required|exists:types,id'
         ];
     }
 }
