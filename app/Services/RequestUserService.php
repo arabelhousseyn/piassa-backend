@@ -27,7 +27,7 @@ class RequestUserService{
                     ]
                 ];
 
-                return response($message,500);
+                return response($message,302);
             }
 
         $data = $request->except('type','user_vehicle_id');

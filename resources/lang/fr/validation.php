@@ -156,7 +156,8 @@ return [
         ],
         'user_vehicle_id' => [
             'required' => 'Véhicule requis.',
-            'exists' => 'Véhicule n\'existe pas.'
+            'exists' => 'Véhicule n\'existe pas.',
+            'unique' => 'Contrôle technique existe déjà pour ce véhicule.'
         ],
         'qt' => [
             'required' => 'Erreur veuillez réessayer',
@@ -181,7 +182,23 @@ return [
         ],
         'chassis_number' => [
             'required' => 'N° châssis requis.'
-        ]
+        ],
+        'technical_control' => [
+            'required' => 'Contrôle technique requis.',
+            'date' => 'Contrôle technique doit être date.',
+            'date_format' => 'Date contrôle technique doit être format Y-m-d.',
+        ],
+        'assurance' => [
+            'required' => 'Assurance requis.',
+            'date' => 'Assurance doit être date.',
+            'date_format' => 'Date Assurance doit être format Y-m-d.',
+        ],
+        'emptying' => [
+            'required' => 'Vidange requis.',
+            'date' => 'Vidange doit être date.',
+            'date_format' => 'Date Vidange doit être format Y-m-d.',
+        ],
+
 
     ],
 

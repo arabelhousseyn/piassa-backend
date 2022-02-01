@@ -117,15 +117,9 @@ class VehicleController extends Controller
     {
         if($request->validated())
         {
-            try {
-                $user_vehicle = UserVehicle::findOrFail($request->user_vehicle_id);
+                $user_vehicle = UserVehicle::find($request->user_vehicle_id);
                 $user_vehicle->control()->create($request->only(['technical_control','assurance','emptying']));
                 return response(['success' => true],201);
-            }catch (\Exception $e)
-            {
-                return response(['message' => 'not found'],404);
-            }
-
         }
     }
 

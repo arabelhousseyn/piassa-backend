@@ -24,18 +24,9 @@ class UpdateUserVehicleControlRequest extends FormRequest
     public function rules()
     {
         return [
-            'technical_control' => 'date',
-            'assurance' => 'date',
-            'emptying' => 'date'
-        ];
-    }
-
-    public function messages()
-    {
-        return [
-            'technical_control.date' => 'Contrôle technique doit être date.',
-            'assurance.date' => 'Assurance doit être date.',
-            'emptying.date' => 'Vidange doit être date.'
+            'technical_control' => 'date|date_format:Y-m-d',
+            'assurance' => 'date|date_format:Y-m-d',
+            'emptying' => 'date|date_format:Y-m-d'
         ];
     }
 }
