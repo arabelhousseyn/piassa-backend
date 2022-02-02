@@ -198,6 +198,19 @@ return [
             'date' => 'Vidange doit être date.',
             'date_format' => 'Date Vidange doit être format Y-m-d.',
         ],
+        'seller_request_id' => [
+            'required' => 'Erreur veuillez réessayer.',
+            'exists' => 'Erreur veuillez réessayer.'
+        ],
+        'marks' => [
+            'required' => 'Marque requis.',
+        ],
+        'prices' => [
+            'required' => 'Prix requis.',
+        ],
+        'available_at' => [
+            'required' => 'Disponibilité requis.'
+        ]
 
 
     ],

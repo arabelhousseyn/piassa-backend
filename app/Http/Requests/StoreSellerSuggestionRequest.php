@@ -24,21 +24,10 @@ class StoreSellerSuggestionRequest extends FormRequest
     public function rules()
     {
         return [
-            'seller_request_id' => 'required|integer',
+            'seller_request_id' => 'required|exists:seller_requests,id',
             'marks' => 'required',
             'prices' => 'required',
             'available_at' => 'required'
-        ];
-    }
-
-    public function messages()
-    {
-        return [
-            'seller_request_id.required' => 'Erreur veuillez réessayer.',
-            'seller_request_id.integer' => 'Erreur veuillez réessayer.',
-            'mark.required' => 'Marque requis.',
-            'price.required' => 'Prix requis.',
-            'available_at.required' => 'Disponibilité requis.',
         ];
     }
 }

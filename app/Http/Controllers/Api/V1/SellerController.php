@@ -8,7 +8,7 @@ use App\Http\Requests\StoreSellerSuggestionRequest;
 use App\Rules\FilterLocation;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
-use App\Models\{Seller,SellerRequest};
+use App\Models\{Seller, SellerRequest, SellerSuggestion};
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
@@ -46,15 +46,15 @@ class SellerController extends Controller
 
     public function list_requests()
     {
-        $seller = Seller::with('requests.request.vehicle.sign','requests.request.vehicle.user.profile.province','requests.request.informations'
+        $data = [];
+        $seller = Seller::with('requests.suggestion','requests.request.vehicle.sign','requests.request.vehicle.user.profile.province','requests.request.informations'
         ,'requests.request.vehicle.user.locations')
             ->with(['requests' => function($query){
                 return $query->whereNull('suggest_him_at');
             }])->find(Auth::id());
-        $requests = $seller->requests->map(function($map){
-            return $map->only('request');
-        });
-        return response($requests,200);
+
+
+        return response($seller->requests,200);
     }
 
     public function count_seller_requests_by_type($types)
@@ -92,11 +92,25 @@ class SellerController extends Controller
         if(count($marks) == count($prices) && count($marks) == count($available_at) &&
         count($prices) == count($available_at))
             {
+                $seller_request = SellerRequest::find($request->seller_request_id);
+                $seller = Seller::find(Auth::id());
+                if(!$seller->can('handle_request',$seller_request))
+                {
+                    $message = [
+                        'message' => [
+                            'error' => [
+                                __('message.request_error')
+                            ]
+                        ]
+                    ];
+
+                    return response($message,403);
+                }
+
                 SellerRequest::whereId($request->seller_request_id)->update([
                     'suggest_him_at' => Carbon::now()
                 ]);
 
-                $seller_request = SellerRequest::find($request->seller_request_id);
                 for ($i=0;$i<count($marks);$i++)
                 {
                     $seller_request->suggestion()->create([
