@@ -9,6 +9,14 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 class LoginController extends Controller
 {
+
+
+
+    public function __construct()
+    {
+        $this->middleware('check.role');
+    }
+
     /**
      * Handle the incoming request.
      *
@@ -22,6 +30,7 @@ class LoginController extends Controller
             if(Auth::attempt($request->only('phone','password')))
             {
                 $user = User::with('profile')->find(Auth::id());
+
                 $token = $user->createToken('piassa')->plainTextToken;
                 $user['token'] = $token;
                 return response($user,200);

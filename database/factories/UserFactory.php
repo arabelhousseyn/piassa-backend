@@ -53,6 +53,7 @@ class UserFactory extends Factory
             $user->locations()->create([
                 'location' => '0,0'
             ]);
+            $user->assignRole('P');
         });
     }
 }
