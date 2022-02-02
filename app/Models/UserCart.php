@@ -29,11 +29,6 @@ class UserCart extends Model
         return $this->belongsTo(User::class,'user_id')->withDefault();
     }
 
-    public function suggestion()
-    {
-        return $this->belongsTo(SellerSuggestion::class,'seller_suggestion_id')->withDefault();
-    }
-
     public function items()
     {
         return $this->hasMany(UserCartItem::class);

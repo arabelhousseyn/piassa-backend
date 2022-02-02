@@ -51,10 +51,24 @@ class SellerController extends Controller
         ,'requests.request.vehicle.user.locations')
             ->with(['requests' => function($query){
                 return $query->whereNull('suggest_him_at');
-            }])->find(Auth::id());
+            }])
+            ->with(['requests.request' => function ($query){
+                return $query->whereNull('expired_at');
+            }])
+            ->find(Auth::id());
 
+        $subset = $seller->requests->map(function ($collection){
+            return $collection->only('request');
+        });
 
-        return response($seller->requests,200);
+        foreach ($subset as $item) {
+            if(@$item['request']->id)
+            {
+                $data[] = $item;
+            }
+        }
+
+        return response($data,200);
     }
 
     public function count_seller_requests_by_type($types)

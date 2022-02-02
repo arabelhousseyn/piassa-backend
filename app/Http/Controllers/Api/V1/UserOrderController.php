@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserOrderRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\Models\{UserCart,UserOrder,User,Shipper};
+use App\Models\{UserCart, UserOrder, User, Shipper, UserRequest};
 use Illuminate\Support\Carbon;
 use function PHPUnit\Framework\isEmpty;
 use App\Events\NewOrderEvent;
@@ -26,7 +26,7 @@ class UserOrderController extends Controller
     {
         if($request->validated())
         {
-            $user_cart = UserCart::with('items')->findOrFail($request->user_cart_id);
+            $user_cart = UserCart::with('items.item.request.request')->findOrFail($request->user_cart_id);
 
             $user_cart_items = $user_cart->items;
 
@@ -35,7 +35,7 @@ class UserOrderController extends Controller
                 $message = [
                     'message' => [
                         'errors' => [
-                            'Le panier est vide'
+                            __('message.cart_error')
                         ]
                     ]
                 ];
@@ -69,6 +69,11 @@ class UserOrderController extends Controller
                 $user_order_info = UserOrder::with('user')->find($user_order->id);
 
                 foreach ($user_cart_items as $user_cart_item) {
+                    UserRequest::where('id',$user_cart_item->item->request->request->id)->update([
+                        'expired_at' => Carbon::now()
+                    ]);
+
+
                     $user_order_info->items()->create([
                         'seller_suggestion_id' => $user_cart_item->seller_suggestion_id
                     ]);

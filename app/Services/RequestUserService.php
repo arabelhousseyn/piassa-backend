@@ -27,7 +27,7 @@ class RequestUserService{
                 return response($message,403);
             }
 
-        $data = $request->except('type','user_vehicle_id');
+        $data = $request->except('type_id','user_vehicle_id','qt');
 
         $operation = UserRequest::create($request->only('user_vehicle_id','qt','type_id'));
 

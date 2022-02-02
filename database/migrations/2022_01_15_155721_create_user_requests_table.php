@@ -18,6 +18,7 @@ class CreateUserRequestsTable extends Migration
             $table->foreignId('user_vehicle_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('qt');
             $table->foreignId('type_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->timestamp('expired_at')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

@@ -12,7 +12,8 @@ return [
     'chassis_error' => 'N° châssis incorrect.',
     'vehicle_not_found' => 'Véhicule n\'existe pas.',
     'request_error' => 'le vendeur n\'appartient pas à la demande.',
-    'role_error' => 'L\'utilisateur n\'appartient pas au role.'
+    'role_error' => 'L\'utilisateur n\'appartient pas au role.',
+    'cart_error' => 'Le panier est vide.'
 
 
 ];

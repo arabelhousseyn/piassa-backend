@@ -16,6 +16,8 @@ class ShipperController extends Controller
     use CalculateCommissionShipperTrait,CalculateCommissionCompanyTrait,GenerateOrderInvoiceTrait;
     public function index()
     {
+        $final = [];
+
         $data = Shipper::with('orderRequests.order.items.item.request.request.informations')->
         with(['orderRequests.order' => function($query){
             return $query->whereNull('confirmed_at');
@@ -23,7 +25,15 @@ class ShipperController extends Controller
         $subset = $data->orderRequests->map(function ($filter){
             return $filter->only('id','created_at','order');
         });
-        return response($subset,200);
+
+        foreach ($subset as $item) {
+            if(@$item->order->id)
+            {
+                $final[] = $item;
+            }
+        }
+
+        return response($final,200);
     }
 
     public function count_orders_by_delivery_type($types)

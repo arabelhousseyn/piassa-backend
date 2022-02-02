@@ -36,7 +36,7 @@ class SellerSuggestion extends Model
 
     public function ordred()
     {
-        return $this->hasOne(UserOrderItem::class);
+        return $this->hasOne(UserCartItem::class);
     }
 
 }
