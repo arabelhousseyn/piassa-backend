@@ -101,7 +101,7 @@ class UserOrderController extends Controller
 
     public function order_details($id)
     {
-        $user_order = UserOrder::with('items.item.request.request.informations','events')->find($id);
-        return response($user_order->only('id','ref','type_delivery','location','items','created_at','events'),200);
+        $user_order = UserOrder::with('items.item.request.request.informations','events','invoice')->find($id);
+        return response($user_order->only('id','ref','type_delivery','location','items','created_at','events','invoice'),200);
     }
 }

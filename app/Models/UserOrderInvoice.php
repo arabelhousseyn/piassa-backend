@@ -19,4 +19,11 @@ class UserOrderInvoice extends Model
         'updated_at',
         'deleted_at'
     ];
+
+    protected $appends = ['path'];
+
+    protected function getPathAttribute()
+    {
+        return env('APP_URL') . '/'.$this->attributes['path'];
+    }
 }

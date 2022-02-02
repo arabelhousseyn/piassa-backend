@@ -158,7 +158,7 @@ class ShipperController extends Controller
             $message = [
                 'message' => [
                     'errors' => [
-                        'Operation deja effectué'
+                        __('message.operation_error')
                     ]
                 ]
             ];
