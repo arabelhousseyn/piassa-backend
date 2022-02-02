@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginShipperRequest;
 use App\Models\Shipper;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class LoginShipperController extends Controller

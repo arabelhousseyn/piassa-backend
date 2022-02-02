@@ -8,7 +8,7 @@ use App\Http\Requests\StoreSellerSuggestionRequest;
 use App\Rules\FilterLocation;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
-use App\Models\{Seller, SellerRequest, SellerSuggestion};
+use App\Models\{Seller, SellerRequest};
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;

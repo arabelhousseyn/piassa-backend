@@ -2,13 +2,9 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Exceptions\ProvinceNotFoundException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use App\Models\{User,Province};
 
 class RegisterController extends Controller
