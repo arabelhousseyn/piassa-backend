@@ -10,13 +10,6 @@ use App\Models\User;
 class LoginController extends Controller
 {
 
-
-
-    public function __construct()
-    {
-        $this->middleware('check.role');
-    }
-
     /**
      * Handle the incoming request.
      *
@@ -30,7 +23,19 @@ class LoginController extends Controller
             if(Auth::attempt($request->only('phone','password')))
             {
                 $user = User::with('profile')->find(Auth::id());
-
+                if(!in_array($request->has_role,$user->roles->pluck('name')->toArray()))
+                {
+                    $message = [
+                        'message' => [
+                            'errors' => [
+                                'role' => [
+                                    __('message.role_error')
+                                ]
+                            ]
+                        ]
+                    ];
+                    return response($message,403);
+                }
                 $token = $user->createToken('piassa')->plainTextToken;
                 $user['token'] = $token;
                 return response($user,200);

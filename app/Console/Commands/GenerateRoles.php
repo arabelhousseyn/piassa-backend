@@ -38,8 +38,8 @@ class GenerateRoles extends Command
     public function handle()
     {
 
-        Role::create(['name' => 'p']);
-        Role::create(['name' => 'c']);
+        Role::create(['name' => 'P']);
+        Role::create(['name' => 'C']);
         Role::create(['name' => 'A']);
         return $this->info('roles created.');
     }

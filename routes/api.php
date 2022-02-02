@@ -32,7 +32,7 @@ Route::apiResource('provinces',ProvinceController::class);
 
 
 
-Route::middleware(['throttle:login'])->group(function (){
+//Route::middleware(['throttle:login'])->group(function (){
 
     // Auth and register for user
     Route::prefix('user')->group(function(){
@@ -52,7 +52,7 @@ Route::middleware(['throttle:login'])->group(function (){
         Route::post('login',LoginShipperController::class);
     });
 
-});
+//});
 
 Route::middleware('auth:sanctum')->group(function(){
 
