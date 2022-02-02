@@ -14,7 +14,7 @@ class ProvinceController extends Controller
      */
     public function index()
     {
-        $provinces = Province::all();
+        $provinces = Province::where('is_available',true)->get();
         return response($provinces,200);
     }
 
