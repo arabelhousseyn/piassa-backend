@@ -31,7 +31,7 @@ class CheckChassisNumber
                     ]
                 ]
             ];
-            return response($message,403);
+            return response($message,302);
         }
 
         return $next($request);

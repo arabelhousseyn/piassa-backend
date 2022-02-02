@@ -15,13 +15,13 @@ class UserVehicleTest extends TestCase
      */
     public function test_example()
     {
-        $user = User::find(116);
+        $user = User::find(1);
         $data = [
             'sign_id' => 1,
-            'model' => 'das',
+            'model' => 'AUDI A3',
             'year' => '2021',
-            'motorization' => '223',
-            'chassis_number' => 'adsad'
+            'motorization' => '#4812',
+            'chassis_number' => 'asdadasd'
         ];
         $response = $this->actingAs($user)->post('api/vehicle',$data);
         $response->assertStatus(201);

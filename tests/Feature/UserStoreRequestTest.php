@@ -15,14 +15,15 @@ class UserStoreRequestTest extends TestCase
      */
     public function test_example()
     {
-        $user = User::find(116);
+        $user = User::find(1);
 
         $data = [
-            'user_vehicle_id' => '2',
+            'user_vehicle_id' => 1,
             'qt' => '2',
             'type_id' => '1',
-            'mark' => 'hiho',
-            'piston' => 'test'
+            'mark' => 'AUDI',
+            'position' => 'G',
+            'pieces' => 'pistion'
         ];
 
         $response = $this->actingAs($user)->post('/api/user/request',$data);
