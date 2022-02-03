@@ -14,7 +14,7 @@ class AppVersionController extends Controller
      */
     public function __invoke()
     {
-        $version = AppVersion::where('app_type','mobile')->first();
+        $version = AppVersion::select('app_type','versioning')->where('app_type','mobile')->first();
         return response($version,200);
     }
 }
