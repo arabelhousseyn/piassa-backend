@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\{
     ProvinceController,
@@ -17,6 +16,8 @@ use App\Http\Controllers\Api\V1\{
     LoginShipperController,
     ShipperController
 };
+
+use App\Http\Controllers\AppVersionController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -28,9 +29,10 @@ use App\Http\Controllers\Api\V1\{
 |
 */
 
+Route::get('versioning',AppVersionController::class);
+
+
 Route::apiResource('provinces',ProvinceController::class);
-
-
 
 Route::middleware(['throttle:login'])->group(function (){
 
