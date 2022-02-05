@@ -27,7 +27,7 @@ class ShipperController extends Controller
         });
 
         foreach ($subset as $item) {
-            if(@$item->order->id)
+            if(@$item['order']->id)
             {
                 $final[] = $item;
             }
