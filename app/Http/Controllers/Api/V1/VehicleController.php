@@ -14,7 +14,7 @@ class VehicleController extends Controller
 
     public function __construct()
     {
-        $this->middleware('check.chassis')->except(['index','show','create','edit','update','destory','store_control','update_control']);
+        $this->middleware('check.chassis')->except(['index','show','create','edit','update','destory','store_control','update_control','get_control']);
     }
 
     /**
@@ -173,6 +173,24 @@ class VehicleController extends Controller
                 ];
                 return response($message,302);
             }
+        }
+    }
+
+    public function get_control($user_vehicle_id)
+    {
+        try {
+            $user_vehicle = UserVehicle::with('control')->findOrFail($user_vehicle_id);
+            return response($user_vehicle->control,200);
+        }catch (\Exception $e)
+        {
+            $message = [
+                'message' => [
+                    'errors' => [
+                        __('message.vehicle_not_found')
+                    ]
+                ]
+            ];
+            return response($message,302);
         }
     }
 }

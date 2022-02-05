@@ -84,6 +84,7 @@ Route::middleware('auth:sanctum')->group(function(){
 
     Route::prefix('vehicle')->group(function (){
         Route::post('store_control',[VehicleController::class,'store_control']);
+        Route::get('control/{user_vehicle_id}',[VehicleController::class,'get_control'])->whereNumber('user_vehicle_id');
         Route::put('update_control/{user_vehicle_id}',[VehicleController::class,'update_control'])->whereNumber('user_vehicle_id');
     });
 
