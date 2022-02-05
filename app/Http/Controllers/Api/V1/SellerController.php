@@ -107,8 +107,7 @@ class SellerController extends Controller
         count($prices) == count($available_at))
             {
                 $seller_request = SellerRequest::find($request->seller_request_id);
-                $seller = Seller::find(Auth::id());
-                if(!$seller->can('handle_request',$seller_request))
+                if(!Auth::user()->can('handle_request',$seller_request))
                 {
                     $message = [
                         'message' => [
