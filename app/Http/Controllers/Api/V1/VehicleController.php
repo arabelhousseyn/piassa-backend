@@ -122,7 +122,7 @@ class VehicleController extends Controller
 
                  if($user->can('handle_vehicle',$user_vehicle))
                  {
-                   $user_vehicle->control()->update($request->only(['technical_control','assurance','emptying']));
+                   $user_vehicle->control()->create($request->only(['technical_control','assurance','emptying']));
                    return response(['success' => true],200);
                  }
 
