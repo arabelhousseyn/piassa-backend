@@ -24,7 +24,7 @@ class StoreSellerSuggestionRequest extends FormRequest
     public function rules()
     {
         return [
-            'seller_request_id' => 'required|exists:seller_requests,id',
+            'seller_request_id' => 'required|exists:user_requests,id',
             'marks' => 'required',
             'prices' => 'required',
             'available_at' => 'required'
