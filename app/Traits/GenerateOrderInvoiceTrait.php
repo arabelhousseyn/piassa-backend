@@ -60,7 +60,7 @@ trait GenerateOrderInvoiceTrait
             ->buyer($client)
             ->dateFormat('m/d/Y')
             ->payUntilDays(0)
-            ->currencySymbol('dzd')
+            ->currencySymbol('DZD')
             ->currencyCode('DZD')
             ->currencyFormat('{SYMBOL}{VALUE}')
             ->currencyThousandsSeparator('.')

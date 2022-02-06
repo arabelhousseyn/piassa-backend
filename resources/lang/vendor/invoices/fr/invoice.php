@@ -16,7 +16,7 @@ return [
     'code'            => 'Code',
     'vat'             => 'VAT code',
     'phone'           => 'Téléphone',
-    'description'     => 'Description',
+    'description'     => 'Article',
     'units'           => 'Unités',
     'quantity'        => 'Qt',
     'price'           => 'Prix',
