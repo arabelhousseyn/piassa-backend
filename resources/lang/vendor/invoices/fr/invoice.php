@@ -8,7 +8,7 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'serial'          => 'Numéro de série.',
+    'serial'          => 'Numéro de facture.',
     'date'            => 'Date de facturation',
     'seller'          => 'Entreprise',
     'buyer'           => 'Acheteur',

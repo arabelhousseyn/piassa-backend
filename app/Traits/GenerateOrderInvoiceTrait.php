@@ -12,8 +12,9 @@ use Konekt\PdfInvoice\InvoicePrinter;
 
 trait GenerateOrderInvoiceTrait
 {
-    public function generateInvoicePdf($user_order_id)
+    public function generateInvoicePdf($user_order_id,$tax1 = 0,$tax2 = 0)
     {
+        $tax = $tax1 + $tax2;
         $user_order = UserOrder::with('items.item.request.request','user.profile')->find($user_order_id);
 
 
@@ -67,6 +68,7 @@ trait GenerateOrderInvoiceTrait
             ->filename($user_order->user->profile->full_name . ' Youssef boudjema')
             ->addItems($items)
             ->notes($notes)
+            ->totalTaxes(floatval($tax))
             ->logo(public_path('vendor/invoices/piassa-logo.png'))
             // You can additionally save generated invoice to configured disk
             ->save('invoice');
