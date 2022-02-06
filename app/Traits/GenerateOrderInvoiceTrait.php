@@ -74,6 +74,6 @@ trait GenerateOrderInvoiceTrait
          $link = $invoice->filename;
 
         // And return invoice itself to browser or have a different view
-        return 'storage/app/public/invoices/'.$link;
+        return 'storage/invoices/'.$link;
     }
 }
