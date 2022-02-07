@@ -62,6 +62,11 @@ class Seller extends Authenticatable
         return $this->hasMany(SellerRequest::class);
     }
 
+    public function phones()
+    {
+        return $this->hasMany(SellerPhone::class);
+    }
+
     public function getHasLocationAttribute()
     {
         if($this->profile->location === null)

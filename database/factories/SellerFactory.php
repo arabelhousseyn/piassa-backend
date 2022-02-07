@@ -38,6 +38,10 @@ class SellerFactory extends Factory
                 'job' => $this->faker->jobTitle,
                 'type_id' => 1
             ]);
+
+            $seller->phones()->create([
+                'phone' => $this->faker->numerify('##########')
+            ]);
         });
     }
 
