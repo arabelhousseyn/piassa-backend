@@ -30,6 +30,7 @@ class SellerFactory extends Factory
                 'first_name' => $this->faker->firstName,
                 'last_name' => $this->faker->lastName,
                 'commercial_name' => $this->faker->name,
+                'province_id' => 1,
                 'device_token' => null,
                 'location' => '0,0'
             ]);
