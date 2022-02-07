@@ -163,7 +163,6 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         LaravelDaily\Invoices\InvoiceServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
-        Kreait\Laravel\Firebase\ServiceProvider::class,
 
         /*
          * Package Service Providers...

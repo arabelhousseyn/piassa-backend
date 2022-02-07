@@ -10,7 +10,6 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "kmlaravel/laravel-geographical-calculator": "^2.1",
         "konekt/pdf-invoice": "^1.10",
-        "laravel-notification-channels/fcm": "~2.0",
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
