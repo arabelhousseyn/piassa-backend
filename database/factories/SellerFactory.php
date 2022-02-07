@@ -37,7 +37,8 @@ class SellerFactory extends Factory
 
             $seller->jobs()->create([
                 'job' => $this->faker->jobTitle,
-                'type_id' => 1
+                'type_id' => 1,
+                'sign_id' => 1
             ]);
 
             $seller->phones()->create([

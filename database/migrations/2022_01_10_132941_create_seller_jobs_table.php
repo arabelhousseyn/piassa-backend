@@ -18,6 +18,7 @@ class CreateSellerJobsTable extends Migration
             $table->foreignId('seller_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('job');
             $table->foreignId('type_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('sign_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
         });
