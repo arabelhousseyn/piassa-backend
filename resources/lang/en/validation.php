@@ -141,9 +141,76 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'phone' => [
+            'required' => 'Phone required.',
+            'digits' => 'Phone number must be 10 digits.',
         ],
+
+        'password' => [
+            'required' => 'Password required.',
+            'min' => 'The password must have a minimum length of 8.',
+        ],
+
+        'location' => [
+            'required' => 'Location required.'
+        ],
+        'user_vehicle_id' => [
+            'required' => 'Vehicle required.',
+            'exists' => 'Vehicle does not exist.',
+            'unique' => 'technical control already exists for this vehicle.'
+        ],
+        'qt' => [
+            'required' => 'Error please try again',
+            'integer' => 'Error please try again.'
+        ],
+        'type_id' => [
+            'required' => 'Type required.',
+            'exists' => 'Type does not exist.'
+        ],
+        'sign_id' => [
+            'required' => 'Vehicle sign required.',
+            'exists' => 'Vehicle sign do not exist.'
+        ],
+        'model' => [
+            'required' => 'Model required.'
+        ],
+        'year' => [
+            'required' => 'Year required.'
+        ],
+        'motorization' => [
+            'required' => 'Motorization required.'
+        ],
+        'chassis_number' => [
+            'required' => 'N° châssis required.'
+        ],
+        'technical_control' => [
+            'required' => 'technical control required.',
+            'date' => 'technical control must be dated.',
+            'date_format' => 'technical control must be Y-m-d.',
+        ],
+        'assurance' => [
+            'required' => 'Ansurance required.',
+            'date' => 'Assurance must be dated.',
+            'date_format' => 'Assurance must be Y-m-d.',
+        ],
+        'emptying' => [
+            'required' => 'Oil change required.',
+            'date' => 'Oil change must be date.',
+            'date_format' => 'Oil change must be Y-m-d.',
+        ],
+        'seller_request_id' => [
+            'required' => 'Error please try again.',
+            'exists' => 'Error please try again.'
+        ],
+        'marks' => [
+            'required' => 'Mark required.',
+        ],
+        'prices' => [
+            'required' => 'Price required.',
+        ],
+        'available_at' => [
+            'required' => 'Availability required.'
+        ]
     ],
 
     /*

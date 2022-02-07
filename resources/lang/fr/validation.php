@@ -148,7 +148,7 @@ return [
 
         'password' => [
             'required' => 'Mote de passe requis.',
-            'min' => 'L mot de passe doit avoir une longueur minimale de 8.',
+            'min' => 'Le mot de passe doit avoir une longueur minimale de 8.',
         ],
 
         'location' => [
@@ -165,7 +165,7 @@ return [
         ],
         'type_id' => [
             'required' => 'Type requis.',
-            'exists' => 'Type n\'existe pas'
+            'exists' => 'Type n\'existe pas.'
         ],
         'sign_id' => [
             'required' => 'Étiquettes de véhicule requis.',
