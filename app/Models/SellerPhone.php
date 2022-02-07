@@ -6,18 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class SellerProfile extends Model
+class SellerPhone extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'seller_id',
-        'first_name',
-        'last_name',
-        'province_id',
-        'commercial_name',
-        'device_token',
-        'location'
+        'phone'
     ];
 
     protected $hidden = [
@@ -25,9 +20,4 @@ class SellerProfile extends Model
         'updated_at',
         'deleted_at'
     ];
-
-    public function province()
-    {
-        return $this->belongsTo(Province::class,'province_id')->withDefault();
-    }
 }
