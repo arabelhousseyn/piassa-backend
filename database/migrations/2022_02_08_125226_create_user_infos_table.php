@@ -21,6 +21,7 @@ class CreateUserInfosTable extends Migration
             $table->string('num_ar');
             $table->string('name_company');
             $table->string('contact_name')->nullable();
+            $table->unique(['user_id']);
             $table->softDeletes();
             $table->timestamps();
         });
