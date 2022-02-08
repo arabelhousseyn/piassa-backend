@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Events\NewRequestEvent;
+use App\Events\NewRequestForSellerEvent;
 use App\Models\{UserVehicle,UserRequest,User,Seller};
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -13,7 +13,7 @@ class RequestUserService{
     public function store($request)
     {
             $user = User::find(Auth::id());
-            $user_vehicle = UserVehicle::find($request->user_vehicle_id);
+            $user_vehicle = UserVehicle::with('user.profile')->find($request->user_vehicle_id);
             if(!$user->can('handle_vehicle',$user_vehicle))
             {
                 $message = [
@@ -52,7 +52,8 @@ class RequestUserService{
             {
                 foreach ($seller->jobs as $job)
                 {
-                    if($job->type_id == Str::upper($operation->type_id) && $user_vehicle->sign_id == $job->sign_id)
+                    if($job->type_id == Str::upper($operation->type_id) && $user_vehicle->sign_id == $job->sign_id
+                     && $seller->profile->province_id == $user_vehicle->profile->province_id)
                     {
                         $open = true;
                     }
@@ -102,7 +103,7 @@ class RequestUserService{
             }
         }
 
-        event(New NewRequestEvent($operation));
+        event(New NewRequestForSellerEvent($operation));
 
         return response(['success' => true,'request_id' => $operation->id],201);
     }

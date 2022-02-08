@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class NewRequestEvent implements ShouldBroadcast
+class NewRequestForSellerEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -33,7 +33,7 @@ class NewRequestEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('admin');
+        return new Channel('seller');
     }
 
     public function broadcastAs()

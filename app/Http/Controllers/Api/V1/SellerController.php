@@ -12,7 +12,7 @@ use App\Models\{Seller, SellerRequest};
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
-use App\Events\NewSuggestionEvent;
+use App\Events\{NewSuggestionEvent,NewRequestEvent};
 class SellerController extends Controller
 {
     public function insert_location(Request $request)
@@ -134,6 +134,7 @@ class SellerController extends Controller
                 }
                 $data = SellerRequest::with('suggestion')->find($request->seller_request_id);
                 event(new NewSuggestionEvent($data));
+                event(new NewRequestEvent($data));
                 return response(['success' => true],201);
 
             }else{
