@@ -144,6 +144,7 @@ return [
         'phone' => [
             'required' => 'Téléphone requis.',
             'digits' => 'Le numéro de téléphone doit être composé de 10 chiffres.',
+            'unique' => 'Le téléphone a déjà été pris.'
         ],
 
         'password' => [
@@ -210,7 +211,7 @@ return [
         ],
         'available_at' => [
             'required' => 'Disponibilité requis.'
-        ]
+        ],
 
 
     ],

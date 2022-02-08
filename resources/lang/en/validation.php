@@ -144,6 +144,7 @@ return [
         'phone' => [
             'required' => 'Phone required.',
             'digits' => 'Phone number must be 10 digits.',
+            'unique' => 'Phone already taken.'
         ],
 
         'password' => [

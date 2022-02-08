@@ -222,4 +222,20 @@ class SellerController extends Controller
             return response(['success' => true],200);
         }
     }
+
+    public function store_phone(Request $request)
+    {
+        $rules = [
+            'phone' => 'required|digits:10|unique:sellers,phone|unique:seller_phones,phone'
+        ];
+
+        $validated = $request->validate($rules);
+
+        Auth::user()->phones()->create([
+            'phone' => $validated['phone']
+        ]);
+
+        return response(['success' => true],200);
+
+    }
 }
