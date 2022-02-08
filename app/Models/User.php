@@ -76,5 +76,10 @@ class User extends Authenticatable
         return $this->hasMany(UserOrder::class);
     }
 
+    public function commercial_info()
+    {
+        return $this->hasOne(UserInfo::class)->withDefault();
+    }
+
 
 }
