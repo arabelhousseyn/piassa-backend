@@ -97,6 +97,7 @@ Route::middleware('auth:sanctum')->group(function(){
         Route::get('cash',[SellerController::class,'cash']);
         Route::post('store_seller_suggestion',[SellerController::class,'store_seller_suggestion']);
         Route::post('store_phone',[SellerController::class,'store_phone']);
+        Route::get('seller_phone',[SellerController::class,'seller_phone']);
     });
 
     Route::prefix('/shipper')->group(function (){

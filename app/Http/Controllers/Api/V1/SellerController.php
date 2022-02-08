@@ -235,7 +235,17 @@ class SellerController extends Controller
             'phone' => $validated['phone']
         ]);
 
-        return response(['success' => true],200);
+        return response(['success' => true],201);
+    }
 
+    public function seller_phone()
+    {
+        $phones = Auth::user()->phones;
+
+        $subset = $phones->map(function ($filter){
+            return $filter->only('phone');
+        });
+
+        return response($subset,200);
     }
 }
