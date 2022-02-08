@@ -17,6 +17,7 @@ class CreateSellerPhonesTable extends Migration
             $table->id();
             $table->foreignId('seller_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('phone');
+            $table->string('name');
             $table->unique(['phone']);
             $table->softDeletes();
             $table->timestamps();

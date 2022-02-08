@@ -211,6 +211,9 @@ return [
         ],
         'available_at' => [
             'required' => 'Availability required.'
+        ],
+        'name' => [
+            'required' => 'Name required.'
         ]
     ],
 

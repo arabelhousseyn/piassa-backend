@@ -12,7 +12,8 @@ class SellerPhone extends Model
 
     protected $fillable = [
         'seller_id',
-        'phone'
+        'phone',
+        'name'
     ];
 
     protected $hidden = [

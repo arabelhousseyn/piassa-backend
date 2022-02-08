@@ -212,6 +212,9 @@ return [
         'available_at' => [
             'required' => 'Disponibilité requis.'
         ],
+        'name' => [
+            'required' => 'Nom requis.'
+        ]
 
 
     ],

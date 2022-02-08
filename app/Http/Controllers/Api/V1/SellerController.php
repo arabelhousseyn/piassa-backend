@@ -226,13 +226,15 @@ class SellerController extends Controller
     public function store_phone(Request $request)
     {
         $rules = [
-            'phone' => 'required|digits:10|unique:sellers,phone|unique:seller_phones,phone'
+            'phone' => 'required|digits:10|unique:sellers,phone|unique:seller_phones,phone',
+            'name' => 'required'
         ];
 
         $validated = $request->validate($rules);
 
         Auth::user()->phones()->create([
-            'phone' => $validated['phone']
+            'phone' => $validated['phone'],
+            'name' => $validated['name']
         ]);
 
         return response(['success' => true],201);
@@ -243,7 +245,7 @@ class SellerController extends Controller
         $phones = Auth::user()->phones;
 
         $subset = $phones->map(function ($filter){
-            return $filter->only('phone');
+            return $filter->only('phone','name');
         });
 
         return response($subset,200);
