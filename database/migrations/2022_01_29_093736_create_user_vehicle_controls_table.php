@@ -18,7 +18,7 @@ class CreateUserVehicleControlsTable extends Migration
             $table->foreignId('user_vehicle_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->date('technical_control');
             $table->date('assurance');
-            $table->date('emptying');
+            $table->string('emptying');
             $table->unique(['user_vehicle_id']);
             $table->softDeletes();
             $table->timestamps();
