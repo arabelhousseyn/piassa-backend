@@ -20,7 +20,7 @@ class ShipperController extends Controller
 
         $data = Shipper::with('orderRequests.order.items.item.request.request.informations')->
         with(['orderRequests.order' => function($query){
-            return $query->whereNotNull('confirmed_by_administrator_at');
+            return $query->whereNull('confirmed_at')->whereNotNull('confirmed_by_administrator_at');
         }])->find(Auth::id());
         $subset = $data->orderRequests->map(function ($filter){
             return $filter->only('id','created_at','order');
