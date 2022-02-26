@@ -195,9 +195,7 @@ return [
             'date_format' => 'Assurance must be Y-m-d.',
         ],
         'emptying' => [
-            'required' => 'Oil change required.',
-            'date' => 'Oil change must be date.',
-            'date_format' => 'Oil change must be Y-m-d.',
+            'required' => 'Oil change required.'
         ],
         'seller_request_id' => [
             'required' => 'Error please try again.',

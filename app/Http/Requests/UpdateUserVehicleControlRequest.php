@@ -25,8 +25,7 @@ class UpdateUserVehicleControlRequest extends FormRequest
     {
         return [
             'technical_control' => 'date|date_format:Y-m-d',
-            'assurance' => 'date|date_format:Y-m-d',
-            'emptying' => 'date|date_format:Y-m-d'
+            'assurance' => 'date|date_format:Y-m-d'
         ];
     }
 }

@@ -195,9 +195,7 @@ return [
             'date_format' => 'Date Assurance doit être format Y-m-d.',
         ],
         'emptying' => [
-            'required' => 'Vidange requis.',
-            'date' => 'Vidange doit être date.',
-            'date_format' => 'Date Vidange doit être format Y-m-d.',
+            'required' => 'Vidange requis.'
         ],
         'seller_request_id' => [
             'required' => 'Erreur veuillez réessayer.',

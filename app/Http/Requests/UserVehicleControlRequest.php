@@ -27,7 +27,7 @@ class UserVehicleControlRequest extends FormRequest
             'user_vehicle_id' => 'required|unique:user_vehicle_controls|exists:user_vehicles,id',
             'technical_control' => 'required|date|date_format:Y-m-d',
             'assurance' => 'required|date|date_format:Y-m-d',
-            'emptying' => 'required|date|date_format:Y-m-d'
+            'emptying' => 'required'
         ];
     }
 }
