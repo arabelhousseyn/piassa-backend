@@ -3,8 +3,8 @@
 
 return [
 
-    'not_found' => 'not found',
-    'province' => 'province'
+    'not_found' => 'Not found',
+    'province' => 'Province'
 
 
 ];

@@ -3,8 +3,8 @@
 
 return [
 
-    'not_found' => 'pas trouvé',
-    'province' => 'province',
+    'not_found' => 'Pas trouvé',
+    'province' => 'Commune',
     'incorrect' => 'Un de vos informations incorrect',
     'many_requests' => 'Trop de demandes réessayer plus tard.',
     'location_error' => 'Emplacement erroné.',
