@@ -17,6 +17,7 @@ class UserOrder extends Model
         'amount',
         'location',
         'promo_code',
+        'confirmed_by_administrator_at',
         'confirmed_at'
     ];
 

@@ -20,6 +20,7 @@ class CreateUserOrdersTable extends Migration
             $table->enum('type_delivery',['E','S']); // E stand for Express and S stand for STANDARD
             $table->double('amount');
             $table->string('promo_code')->nullable();
+            $table->timestamp('confirmed_by_administrator_at')->nullable();
             $table->timestamp('confirmed_at')->nullable();
             $table->string('location');
             $table->softDeletes();
