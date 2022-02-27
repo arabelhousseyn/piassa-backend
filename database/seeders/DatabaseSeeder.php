@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\{Country, Shipper, Sign, Type, User, Seller};
+use App\Models\{AppVersion, Country, Shipper, Sign, Type, User, Seller};
 use Illuminate\Support\Facades\Artisan;
 
 class DatabaseSeeder extends Seeder
@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         Artisan::call('generate:roles');
+        AppVersion::factory(1)->create();
         Sign::factory(1)->create();
         Type::factory(1)->create();
         Country::factory(1)->create();
