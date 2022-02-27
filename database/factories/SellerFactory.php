@@ -42,6 +42,7 @@ class SellerFactory extends Factory
             ]);
 
             $seller->phones()->create([
+                'name' => $this->faker->name,
                 'phone' => $this->faker->numerify('##########')
             ]);
         });
