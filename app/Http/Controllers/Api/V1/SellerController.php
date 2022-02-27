@@ -87,7 +87,7 @@ class SellerController extends Controller
                 }
             }
             $data[] = [
-                'type' => $request->request->type,
+                'type' => $request->request->type->only('id','name'),
                 'count' => $count
             ];
         }
