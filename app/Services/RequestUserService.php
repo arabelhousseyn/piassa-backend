@@ -45,15 +45,17 @@ class RequestUserService{
         }])->find(Auth::id());
 
         $sellers = Seller::with('profile','jobs')->get();
+
         foreach ($sellers as $seller)
         {
+
             $open = false;
             if($seller->profile->location !== null)
             {
                 foreach ($seller->jobs as $job)
                 {
                     if($job->type_id == Str::upper($operation->type_id) && $user_vehicle->sign_id == $job->sign_id
-                     && $seller->profile->province_id == $user_vehicle->profile->province_id)
+                     && $seller->profile->province_id == $user_vehicle->user->profile->province_id)
                     {
                         $open = true;
                     }
