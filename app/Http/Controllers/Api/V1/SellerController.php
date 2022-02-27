@@ -47,24 +47,25 @@ class SellerController extends Controller
     public function list_requests()
     {
         $data = [];
+        $filters = [];
         $seller = Seller::with('requests.suggestion','requests.request.vehicle.sign','requests.request.vehicle.user.profile.province','requests.request.informations'
         ,'requests.request.vehicle.user.locations')
-            ->with(['requests' => function($query){
-                return $query->whereNull('suggest_him_at');
-            }])
             ->with(['requests.request' => function ($query){
                 return $query->whereNull('expired_at');
             }])
             ->find(Auth::id());
 
-        $subset = $seller->requests->map(function ($collection){
-            return $collection->only('request');
-        });
-
-        foreach ($subset as $item) {
-            if(@$item['request']->id)
+        foreach ($seller->requests as $request) {
+            if($request->suggest_him_at == null)
             {
-                $data[] = $item;
+                $filters[] = $request;
+            }
+        }
+
+        foreach ($filters as $filter) {
+            if(@$filter['request']->id)
+            {
+                $data[] = $filter['request'];
             }
         }
 
