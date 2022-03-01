@@ -13,7 +13,6 @@ trait PushNotificationVehicleControlTrait
         foreach ($controls as $control) {
             $days_in_technical_control = $this->CalculateDiff($control->technical_control);
             $days_in_assurance = $this->CalculateDiff($control->assurance);
-            $days_in_emptying = $this->CalculateDiff($control->emptying);
 
             if($days_in_technical_control  == 2)
             {
@@ -24,12 +23,6 @@ trait PushNotificationVehicleControlTrait
             if($days_in_assurance  == 2)
             {
                 $message = 'Vérifier votre assurance pour véhicule ' . $control->vehicle->model;
-                $this->push('Piassa',$message,$control->vehicle->user->id);
-            }
-
-            if($days_in_emptying  == 2)
-            {
-                $message = 'Vérifier votre vidange pour véhicule ' . $control->vehicle->model;
                 $this->push('Piassa',$message,$control->vehicle->user->id);
             }
         }
