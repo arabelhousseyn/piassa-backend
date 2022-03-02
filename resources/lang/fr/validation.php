@@ -160,10 +160,6 @@ return [
             'exists' => 'Véhicule n\'existe pas.',
             'unique' => 'Contrôle technique existe déjà pour ce véhicule.'
         ],
-        'qt' => [
-            'required' => 'Erreur veuillez réessayer',
-            'integer' => 'Erreur veuillez réessayer.'
-        ],
         'type_id' => [
             'required' => 'Type requis.',
             'exists' => 'Type n\'existe pas.'

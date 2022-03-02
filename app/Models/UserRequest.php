@@ -12,7 +12,6 @@ class UserRequest extends Model
 
     protected $fillable = [
         'user_vehicle_id',
-        'qt',
         'type_id',
         'expired_at'
     ];

@@ -27,18 +27,30 @@ class RequestUserService{
                 return response($message,403);
             }
 
-        $data = $request->except('type_id','user_vehicle_id','qt');
+        $data = $request->except('type_id','user_vehicle_id');
 
-        $operation = UserRequest::create($request->only('user_vehicle_id','qt','type_id'));
+        $operation = UserRequest::create($request->only('user_vehicle_id','type_id'));
 
         foreach ($data as $key => $value) {
             $operation->informations()->create([
-                'attribute' => $key,
-                'value' => $value,
+                'value' => json_encode($value),
                 'attributeable_type' => get_class($operation),
                 'attributeable_id' => $operation->id
             ]);
         }
+
+//        foreach ($data as $key => $value) {
+//            $values = explode(',',$value);
+//            for ($i=0;$i<count($values);$i++)
+//            {
+//                $operation->informations()->create([
+//                    'attribute' => $key,
+//                    'value' => $values[$i],
+//                    'attributeable_type' => get_class($operation),
+//                    'attributeable_id' => $operation->id
+//                ]);
+//            }
+//        }
         $distances = [];
         $user = User::with(['locations' => function($query){
             return $query->orderBy('id','desc')->first();

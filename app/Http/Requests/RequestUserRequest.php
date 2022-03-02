@@ -25,7 +25,6 @@ class RequestUserRequest extends FormRequest
     {
         return [
             'user_vehicle_id' => 'required|exists:user_vehicles,id',
-            'qt' => 'required|integer',
             'type_id' => 'required|exists:types,id'
         ];
     }

@@ -11,7 +11,6 @@ class Attribute extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'attribute',
         'value',
         'attributeable_type',
         'attributeable_id',
