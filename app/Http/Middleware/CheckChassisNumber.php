@@ -20,18 +20,21 @@ class CheckChassisNumber
     {
 
         $sign = Sign::find($request->sign_id);
-        if(!Str::startsWith($request->chassis_number,$sign->prefix))
+        if($sign->prefix !== null)
         {
-            $message = [
-                'message' => [
-                    'errors' => [
-                        'chassis_number' => [
-                            __('message.chassis_error')
+            if(!Str::startsWith($request->chassis_number,$sign->prefix))
+            {
+                $message = [
+                    'message' => [
+                        'errors' => [
+                            'chassis_number' => [
+                                __('message.chassis_error')
+                            ]
                         ]
                     ]
-                ]
-            ];
-            return response($message,302);
+                ];
+                return response($message,302);
+            }
         }
 
         return $next($request);

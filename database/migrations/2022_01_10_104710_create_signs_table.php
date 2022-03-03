@@ -17,7 +17,7 @@ class CreateSignsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('logo');
-            $table->string('prefix');
+            $table->string('prefix')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
