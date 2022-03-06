@@ -17,8 +17,8 @@ class CreateUserInfosTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('commercial_registration');
-            $table->string('nif');
-            $table->string('num_ar');
+            $table->string('nif')->nullable();
+            $table->string('num_ar')->nullable();
             $table->string('name_company');
             $table->string('contact_name')->nullable();
             $table->unique(['user_id']);
