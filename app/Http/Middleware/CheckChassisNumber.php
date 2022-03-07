@@ -25,12 +25,10 @@ class CheckChassisNumber
             if(!Str::startsWith($request->chassis_number,$sign->prefix))
             {
                 $message = [
-                    'message' => [
                         'errors' => [
                             'chassis_number' => [
                                 __('message.chassis_error')
                             ]
-                        ]
                     ]
                 ];
                 return response($message,302);
