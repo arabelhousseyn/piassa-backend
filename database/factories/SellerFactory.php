@@ -32,7 +32,7 @@ class SellerFactory extends Factory
                 'commercial_name' => $this->faker->name,
                 'province_id' => 1,
                 'device_token' => null,
-                'location' => '36.7340,2.9340'
+                'location' => '36.7669,2.9602'
             ]);
 
             $seller->jobs()->create([

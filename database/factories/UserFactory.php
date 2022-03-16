@@ -51,7 +51,7 @@ class UserFactory extends Factory
             ]);
 
             $user->locations()->create([
-                'location' => '36.7669,2.9602'
+                'location' => '36.7944,3.0524'
             ]);
             $user->assignRole('P');
         });
