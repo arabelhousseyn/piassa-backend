@@ -40,8 +40,11 @@ trait GenerateOrderInvoiceTrait
 
         foreach ($user_order->items as $item) {
 
-            $items[] = (new InvoiceItem())->title($item->item->mark)->pricePerUnit(strval($item->item->price))
-            ->quantity(floatval($item->item->request->request->qt));
+//                $parse = json_decode($value->value,true);
+//                return $parse;
+                $items[] = (new InvoiceItem())->title($item->item->mark)->pricePerUnit(strval($item->item->price));
+//                    ->quantity(floatval($value->value->qt));
+
         }
 
         $notes = [
