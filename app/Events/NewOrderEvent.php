@@ -31,7 +31,7 @@ class NewOrderEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('shipper');
+        return new Channel('admin');
     }
 
     public function broadcastAs()
