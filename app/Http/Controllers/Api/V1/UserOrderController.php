@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserOrderRequest;
+use App\Notifications\NewOrderNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\Models\{UserCart, UserOrder, User, Shipper, UserRequest};
+use App\Models\{Admin, UserCart, UserOrder, User, Shipper, UserRequest};
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Notification;
 use function PHPUnit\Framework\isEmpty;
 use App\Events\NewOrderEvent;
 class UserOrderController extends Controller
@@ -91,6 +93,8 @@ class UserOrderController extends Controller
                 }
                 $data = UserOrder::with('shipperUserOrder','items')->find($user_order->id);
                 event(new NewOrderEvent($data));
+                $admins = Admin::all()->toArray();
+                Notification::send($admins,new NewOrderNotification($data));
             });
 
 
