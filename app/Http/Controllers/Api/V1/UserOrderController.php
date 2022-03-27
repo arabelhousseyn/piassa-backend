@@ -93,7 +93,8 @@ class UserOrderController extends Controller
                 }
                 $data = UserOrder::with('shipperUserOrder','items')->find($user_order->id);
                 event(new NewOrderEvent($data));
-                $admins = Admin::all()->toArray();
+                $admins = Admin::all();
+
                 Notification::send($admins,new NewOrderNotification($data));
             });
 
