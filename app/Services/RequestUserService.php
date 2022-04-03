@@ -96,8 +96,8 @@ class RequestUserService{
                         ];
                         $distances[] = $arr;
                     }
-
-                    event(New NewRequestForSellerEvent($operation,$seller->id));
+                    $data = UserRequest::with('informations')->find($operation->id);
+                    event(New NewRequestForSellerEvent($data,$seller->id));
                 }
             }
         }
