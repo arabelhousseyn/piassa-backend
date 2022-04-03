@@ -107,7 +107,7 @@ class SellerController extends Controller
         if(count($marks) == count($prices) && count($marks) == count($available_at) &&
         count($prices) == count($available_at))
             {
-                $seller_request = SellerRequest::find($request->seller_request_id);
+                $seller_request = SellerRequest::with('request.vehicle')->find($request->seller_request_id);
                 if(!Auth::user()->can('handle_request',$seller_request))
                 {
                     $message = [
@@ -134,8 +134,8 @@ class SellerController extends Controller
                     ]);
                 }
                 $data = SellerRequest::with('suggestion')->find($request->seller_request_id);
-                event(new NewSuggestionEvent($data));
-                event(new NewRequestEvent($data));
+                event(new NewSuggestionEvent($data,$seller_request->request->vehicle->user_id));
+//                event(new NewRequestEvent($data));
                 return response(['success' => true],201);
 
             }else{

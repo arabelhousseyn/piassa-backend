@@ -15,15 +15,17 @@ class NewSuggestionEvent implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $data;
+    public $user_id;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($data)
+    public function __construct($data,$user_id)
     {
         $this->data = $data;
+        $this->user_id = $user_id;
     }
 
     /**
@@ -38,6 +40,6 @@ class NewSuggestionEvent implements ShouldBroadcast
 
     public function broadcastAs()
     {
-        return 'suggestion-event';
+        return 'suggestion-event-' . $this->user_id;
     }
 }
