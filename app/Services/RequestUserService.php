@@ -96,6 +96,8 @@ class RequestUserService{
                         ];
                         $distances[] = $arr;
                     }
+
+                    event(New NewRequestForSellerEvent($operation,$seller->id));
                 }
             }
         }
@@ -116,8 +118,6 @@ class RequestUserService{
                 ]);
             }
         }
-
-        event(New NewRequestForSellerEvent($operation));
 
         return response(['success' => true,'request_id' => $operation->id],201);
     }

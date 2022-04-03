@@ -15,15 +15,17 @@ class NewRequestForSellerEvent implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $data;
+    public $seller_id;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($data)
+    public function __construct($data,$seller_id)
     {
         $this->data = $data;
+        $this->seller_id = $seller_id;
     }
 
     /**
@@ -38,6 +40,6 @@ class NewRequestForSellerEvent implements ShouldBroadcast
 
     public function broadcastAs()
     {
-        return 'request-event';
+        return 'request-event-' . $this->seller_id;
     }
 }
