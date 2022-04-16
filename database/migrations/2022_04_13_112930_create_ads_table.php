@@ -17,6 +17,7 @@ class CreateAdsTable extends Migration
             $table->id();
             $table->string('path');
             $table->enum('type',['MS']); // MS means the main screen
+            $table->string('size');
             $table->timestamps();
         });
     }

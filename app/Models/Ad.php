@@ -11,7 +11,8 @@ class Ad extends Model
 
     protected $fillable = [
         'path',
-        'type'
+        'type',
+        'size'
     ];
 
     protected $hidden = [
