@@ -119,7 +119,7 @@ Route::middleware('auth:sanctum')->group(function(){
     // ads
 
     Route::prefix('ads')->group(function (){
-        Route::get('resize/{dim}',[AdController::class,'index'])->middleware();
+        Route::get('resize/{dim}',[AdController::class,'index']);
     });
 
     Route::apiResources([
