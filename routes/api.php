@@ -15,7 +15,8 @@ use App\Http\Controllers\Api\V1\{
     UserOrderController,
     LoginShipperController,
     ShipperController,
-    TypeController
+    TypeController,
+    AdController
 };
 
 use App\Http\Controllers\AppVersionController;
@@ -114,6 +115,12 @@ Route::middleware('auth:sanctum')->group(function(){
     });
 
     Route::get('types',TypeController::class);
+
+    // ads
+
+    Route::prefix('ads')->group(function (){
+        Route::get('resize/{dim}',[AdController::class,'index'])->middleware();
+    });
 
     Route::apiResources([
         'sign' => SignController::class,

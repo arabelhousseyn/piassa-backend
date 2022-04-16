@@ -19,4 +19,9 @@ class Ad extends Model
         'created_at',
         'updated_at'
     ];
+
+    public function getPathAttribute()
+    {
+        return env('DASHBOARD_APP_URL') . $this->attributes['path'];
+    }
 }
