@@ -96,7 +96,7 @@ class RequestUserService{
                         ];
                         $distances[] = $arr;
                     }
-                    $data = UserRequest::with('informations')->find($operation->id);
+                    $data = UserRequest::with('informations','vehicle.sign')->find($operation->id);
                     event(New NewRequestForSellerEvent($data,$seller->id));
                 }
             }

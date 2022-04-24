@@ -65,7 +65,7 @@ class SellerController extends Controller
         foreach ($filters as $filter) {
             if(@$filter['request']->id)
             {
-                $data[] = $filter['request'];
+                $data[] = $filter;
             }
         }
 
@@ -133,7 +133,7 @@ class SellerController extends Controller
                         'available_at' => $available_at[$i],
                     ]);
                 }
-                $data = SellerRequest::with('suggestion')->find($request->seller_request_id);
+                $data = SellerRequest::with('suggestion','request.informations')->find($request->seller_request_id);
                 event(new NewSuggestionEvent($data,$seller_request->request->vehicle->user_id));
 //                event(new NewRequestEvent($data));
                 return response(['success' => true],201);

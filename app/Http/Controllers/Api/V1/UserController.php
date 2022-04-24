@@ -49,7 +49,7 @@ class UserController extends Controller
         }])->whereId($request_id)->first();
 
         foreach ($data->suggestions as $value) {
-            if($value->suggest_him_at !== null)
+            if($value->suggest_him_at !== null && @$value->suggestion->id)
             {
                 $final[] = $value;
             }
