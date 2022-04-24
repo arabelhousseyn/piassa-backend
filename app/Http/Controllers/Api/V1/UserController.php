@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\{UserRequest,UserOrder};
+use App\Models\{User, UserRequest, UserOrder};
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Rules\FilterLocation;
@@ -54,6 +54,34 @@ class UserController extends Controller
                 foreach ($value->suggestion as $value)
                 {
                     $final[] = $value;
+                }
+            }
+        }
+
+        return response($final,200);
+    }
+
+    public function list_suggestions()
+    {
+        $final = [];
+        $data = User::with(['vehicle.requests.suggestions' => function($query){
+            return $query->whereNotNull('suggest_him_at');
+        }])->with(['vehicle.requests.suggestions.suggestion' => function($query){
+            return $query->whereNull('taken_at');
+        }])->find(Auth::id());
+
+        foreach ($data->vehicle as $item)
+        {
+            foreach ($item->requests as $request)
+            {
+                foreach ($request->suggestions as $value) {
+                    if($value->suggest_him_at !== null)
+                    {
+                        foreach ($value->suggestion as $value)
+                        {
+                            $final[] = $value;
+                        }
+                    }
                 }
             }
         }

@@ -39,4 +39,9 @@ class UserVehicle extends Model
     {
         return $this->hasOne(UserVehicleControl::class);
     }
+
+    public function requests()
+    {
+        return $this->hasMany(UserRequest::class);
+    }
 }
