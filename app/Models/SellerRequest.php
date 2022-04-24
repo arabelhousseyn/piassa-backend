@@ -34,7 +34,7 @@ class SellerRequest extends Model
 
     public function suggestion()
     {
-        return $this->hasOne(SellerSuggestion::class)->withDefault();
+        return $this->hasMany(SellerSuggestion::class);
     }
 
 }
