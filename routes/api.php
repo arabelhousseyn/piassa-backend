@@ -83,6 +83,12 @@ Route::middleware('auth:sanctum')->group(function(){
             Route::post('store',[UserOrderController::class,'store_order']);
         });
 
+        // request
+        Route::prefix('request')->group(function (){
+            Route::get('information-details/{user_request_id}',[RequestUserController::class,'userRequestInformationsDetails'])
+            ->whereNumber('user_request_id');
+        });
+
     });
 
     Route::prefix('vehicle')->group(function (){

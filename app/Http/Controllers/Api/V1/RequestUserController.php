@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RequestUserRequest;
+use App\Models\UserRequest;
 use Illuminate\Http\Request;
 use App\Services\RequestUserService;
 class RequestUserController extends Controller
@@ -94,5 +95,16 @@ class RequestUserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function userRequestInformationsDetails($user_request_id)
+    {
+        try {
+            $user_request = UserRequest::with('informations')->findOrFail($user_request_id);
+            return response(['informations' => $user_request->informations],200);
+        }catch (\Exception $exception)
+        {
+            return response(['message' => $exception->getMessage()],404);
+        }
     }
 }
