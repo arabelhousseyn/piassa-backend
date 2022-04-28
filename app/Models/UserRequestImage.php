@@ -18,4 +18,9 @@ class UserRequestImage extends Model
     {
         return $this->belongsTo(UserRequest::class)->withDefault([]);
     }
+
+    public function getPathAttribute()
+    {
+        return env('APP_URL') . $this->attributes['path'];
+    }
 }
