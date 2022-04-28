@@ -7,9 +7,9 @@ use App\Models\{UserVehicle,UserRequest,User,Seller};
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use KMLaravel\GeographicalCalculator\Facade\GeoFacade;
-
+use App\Traits\UploadTrait;
 class RequestUserService{
-
+    use UploadTrait;
     public function store($request)
     {
             $user = User::find(Auth::id());
@@ -30,6 +30,13 @@ class RequestUserService{
         $data = $request->except('type_id','user_vehicle_id');
 
         $operation = UserRequest::create($request->only('user_vehicle_id','type_id'));
+
+        $images = explode(';',$request->images);
+
+        foreach ($images as $image) {
+            $path = $this->uploadImageAsBase64($image,'requestImages');
+            $operation->images()->create(['path'=>$path]);
+        }
 
         foreach ($data as $key => $value) {
             $operation->informations()->create([
