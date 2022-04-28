@@ -49,7 +49,7 @@ class SellerController extends Controller
         $data = [];
         $filters = [];
         $seller = Seller::with('requests.suggestion','requests.request.vehicle.sign','requests.request.vehicle.user.profile.province','requests.request.informations'
-        ,'requests.request.vehicle.user.locations')
+        ,'requests.request.vehicle.user.locations','requests.request.images')
             ->with(['requests.request' => function ($query){
                 return $query->whereNull('expired_at');
             }])

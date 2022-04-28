@@ -68,7 +68,9 @@ class UserController extends Controller
             return $query->whereNotNull('suggest_him_at');
         }])->with(['vehicle.requests.suggestions.suggestion' => function($query){
             return $query->whereNull('taken_at');
-        }])->with('vehicle.requests.informations')->with('vehicle.requests.type')->find(Auth::id());
+        }])->with('vehicle.requests.informations')
+            ->with('vehicle.requests.type')
+            ->with('vehicle.requests.images')->find(Auth::id());
 
         foreach ($data->vehicle as $item)
         {
@@ -82,7 +84,8 @@ class UserController extends Controller
                             $final[] = [
                                 'suggestion' => $value,
                                 'informations' => $request->informations,
-                                'type' => $request->type
+                                'type' => $request->type,
+                                'images' => $request->images
                             ];
                         }
                     }
