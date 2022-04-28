@@ -100,7 +100,7 @@ class RequestUserController extends Controller
     public function userRequestInformationsDetails($user_request_id)
     {
         try {
-            $user_request = UserRequest::with('informations')->findOrFail($user_request_id);
+            $user_request = UserRequest::with('informations','images')->findOrFail($user_request_id);
             return response(['informations' => $user_request->informations],200);
         }catch (\Exception $exception)
         {

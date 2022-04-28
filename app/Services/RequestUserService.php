@@ -27,16 +27,19 @@ class RequestUserService{
                 return response($message,403);
             }
 
-        $data = $request->except('type_id','user_vehicle_id');
+        $data = $request->except('type_id','user_vehicle_id','images');
 
         $operation = UserRequest::create($request->only('user_vehicle_id','type_id'));
 
-        $images = explode(';',$request->images);
-
-        foreach ($images as $image) {
-            $path = $this->uploadImageAsBase64($image,'requestImages');
-            $operation->images()->create(['path'=>$path]);
+        if($request->has('images'))
+        {
+            $images = explode(';',$request->images);
+            foreach ($images as $image) {
+                $path = $this->uploadImageAsBase64($image,'requestImages');
+                $operation->images()->create(['path'=>$path]);
+            }
         }
+
 
         foreach ($data as $key => $value) {
             $operation->informations()->create([
