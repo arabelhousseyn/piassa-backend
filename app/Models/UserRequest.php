@@ -45,4 +45,9 @@ class UserRequest extends Model
     {
         return $this->belongsTo(Type::class,'type_id')->withDefault();
     }
+
+    public function images()
+    {
+        return $this->hasMany(UserRequestImage::class);
+    }
 }
