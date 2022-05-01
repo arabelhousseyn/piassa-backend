@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use App\Http\Requests\StoreSellerSuggestionRequest;
 use App\Rules\FilterLocation;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\{Seller, SellerRequest};
@@ -250,5 +251,20 @@ class SellerController extends Controller
         });
 
         return response($subset,200);
+    }
+
+    public function destroy($seller_request_id)
+    {
+        try {
+            $sellerRequest = SellerRequest::findOrFail($seller_request_id);
+            if(!$sellerRequest->trashed())
+            {
+                $sellerRequest->delete();
+                return response()->noContent();
+            }
+        }catch (ModelNotFoundException $exception)
+        {
+            return throw new ModelNotFoundException('request not found');
+        }
     }
 }
