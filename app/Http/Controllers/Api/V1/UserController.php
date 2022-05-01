@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
-use App\Models\{User, UserRequest, UserOrder};
+use App\Models\{User, UserRequest, UserOrder, SellerSuggestion};
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Rules\FilterLocation;
@@ -132,6 +133,21 @@ class UserController extends Controller
                 ]
             ];
             return response($message,403);
+        }
+    }
+
+    public function destroySuggestion($seller_suggestion_id)
+    {
+        try {
+            $seller_suggestion = SellerSuggestion::findOrFail($seller_suggestion_id);
+            if(!$seller_suggestion->trashed())
+            {
+                $seller_suggestion->delete();
+                return response()->noContent();
+            }
+        }catch (ModelNotFoundException $exception)
+        {
+            return throw new ModelNotFoundException('suggestion not found');
         }
     }
 }
