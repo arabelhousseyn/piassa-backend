@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateUserVehicleControlRequest;
 use App\Http\Requests\UserVehicleControlRequest;
 use App\Http\Requests\VehicleRequest;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\{User,UserVehicle};
@@ -110,7 +111,17 @@ class VehicleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $user_vehicle = UserVehicle::findOrFail($id);
+            if(!$user_vehicle->trashed())
+            {
+                $user_vehicle->delete();
+                return response()->noContent();
+            }
+        }catch (ModelNotFoundException $exception)
+        {
+            throw new ModelNotFoundException('vehicle not found');
+        }
     }
 
     public function store_control(UserVehicleControlRequest $request)
