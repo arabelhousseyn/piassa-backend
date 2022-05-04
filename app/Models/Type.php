@@ -22,7 +22,8 @@ class Type extends Model
         'deleted_at'
     ];
 
-    protected $casts = [
-        'percent' => 'integer'
-    ];
+    public function getTypeAttribute()
+    {
+        return env('DASHBOARD_APP_URL') . $this->attributes['logo'];
+    }
 }
