@@ -21,4 +21,9 @@ class Sign extends Model
         'updated_at',
         'deleted_at'
     ];
+
+    public function getLogoAttribute()
+    {
+        return env('DASHBOARD_APP_URL') . $this->attributes['logo'];
+    }
 }
