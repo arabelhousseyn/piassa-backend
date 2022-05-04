@@ -22,7 +22,7 @@ class Type extends Model
         'deleted_at'
     ];
 
-    public function getTypeAttribute()
+    public function getLogoAttribute()
     {
         return env('DASHBOARD_APP_URL') . $this->attributes['logo'];
     }
