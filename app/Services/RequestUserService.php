@@ -66,24 +66,24 @@ class RequestUserService{
             return $query->orderBy('id','desc')->first();
         }])->find(Auth::id());
 
-//        $sellers = Seller::with('profile','jobs')->get();
-//
-//        foreach ($sellers as $seller)
-//        {
-//
-//            $open = false;
-//            if($seller->profile->location !== null)
-//            {
-//                foreach ($seller->jobs as $job)
-//                {
-//                    if($job->type_id == Str::upper($operation->type_id) && $user_vehicle->sign_id == $job->sign_id
-//                     && $seller->profile->province_id == $user_vehicle->user->profile->province_id)
-//                    {
-//                        $open = true;
-//                    }
-//                }
-//                if($open)
-//                {
+        $sellers = Seller::with('profile','jobs')->get();
+
+        foreach ($sellers as $seller)
+        {
+
+            $open = false;
+            if($seller->profile->location !== null)
+            {
+                foreach ($seller->jobs as $job)
+                {
+                    if($job->type_id == Str::upper($operation->type_id) && $user_vehicle->sign_id == $job->sign_id
+                     && $seller->profile->province_id == $user_vehicle->user->profile->province_id)
+                    {
+                        $open = true;
+                    }
+                }
+                if($open)
+                {
 //                    $info1 = explode(',',$seller->profile->location);
 //                    $info2 = explode(',',$user->locations[0]->location);
 //                    $distance = GeoFacade::setPoint([doubleval($info1[0]), doubleval($info1[1])])
@@ -106,19 +106,22 @@ class RequestUserService{
 //                        ];
 //                        $distances[] = $arr;
 //                    }
-//                    $data = UserRequest::with('vehicle.sign','informations','images')->find($operation->id)->toArray();
-//                    event(New NewRequestForSellerEvent($data,$seller->id));
-//                }
-//            }
-//        }
-        $sellers = Seller::all();
-        foreach ($sellers as $seller) {
-            $data = UserRequest::with('vehicle.sign','informations','images')->find($operation->id)->toArray();
-            event(New NewRequestForSellerEvent($data,$seller->id));
-            $seller->requests()->create([
-                'user_request_id' => $operation->id,
-            ]);
+                    $data = UserRequest::with('vehicle.sign','informations','images')->find($operation->id)->toArray();
+                    event(New NewRequestForSellerEvent($data,$seller->id));
+                    $seller->requests()->create([
+                        'user_request_id' => $operation->id,
+                    ]);
+                }
+            }
         }
+//        $sellers = Seller::all();
+//        foreach ($sellers as $seller) {
+//            $data = UserRequest::with('vehicle.sign','informations','images')->find($operation->id)->toArray();
+//            event(New NewRequestForSellerEvent($data,$seller->id));
+//            $seller->requests()->create([
+//                'user_request_id' => $operation->id,
+//            ]);
+//        }
 //        $temp = [];
 //        foreach ($distances as $distance)
 //        {
