@@ -21,4 +21,14 @@ class SellerJob extends Model
         'deleted_at'
     ];
 
+    public function signs()
+    {
+        return $this->hasMany(SellerJobSign::class);
+    }
+
+    public function types()
+    {
+        return $this->hasMany(SellerJobType::class);
+    }
+
 }
