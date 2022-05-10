@@ -66,21 +66,28 @@ class RequestUserService{
             return $query->orderBy('id','desc')->first();
         }])->find(Auth::id());
 
-        $sellers = Seller::with('profile','jobs')->get();
+        $sellers = Seller::with('profile','signs','types')->get();
 
         foreach ($sellers as $seller)
         {
-
+            $signs = [];
+            $types = [];
             $open = false;
             if($seller->profile->location !== null)
             {
-                foreach ($seller->jobs as $job)
-                {
-                    if($job->type_id == Str::upper($operation->type_id) && $user_vehicle->sign_id == $job->sign_id)
-                    {
-                        $open = true;
-                    }
+                foreach ($seller->signs as $sign) {
+                    $signs[] = $sign->sign_id;
                 }
+
+                foreach ($seller->types as $type) {
+                    $types[] = $type->type_id;
+                }
+
+                if(in_array(Str::upper($operation->type_id),$types) && in_array($user_vehicle->sign_id,$signs))
+                {
+                    $open = true;
+                }
+
                 if($open)
                 {
                     $info1 = explode(',',$seller->profile->location);
