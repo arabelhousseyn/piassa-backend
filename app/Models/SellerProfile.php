@@ -17,7 +17,8 @@ class SellerProfile extends Model
         'province_id',
         'commercial_name',
         'device_token',
-        'location'
+        'location',
+        'condition'
     ];
 
     protected $hidden = [
