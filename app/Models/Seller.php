@@ -52,6 +52,11 @@ class Seller extends Authenticatable
         return $this->hasOne(SellerProfile::class);
     }
 
+    public function jobs()
+    {
+        return $this->hasMany(SellerJob::class);
+    }
+
     public function signs()
     {
         return $this->hasManyThrough(SellerJobSign::class,SellerJob::class);

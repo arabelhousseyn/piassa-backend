@@ -37,11 +37,17 @@ class SellerFactory extends Factory
                 'condition' => $conditions[rand(0,1)]
             ]);
 
-            $seller->jobs()->create([
+           $job = $seller->jobs()->create([
                 'job' => $this->faker->jobTitle,
-                'type_id' => 1,
-                'sign_id' => 1
             ]);
+
+           $job->signs()->create([
+               'sign_id' => 1
+           ]);
+
+           $job->types()->create([
+               'type_id' => 1
+           ]);
 
             $seller->phones()->create([
                 'name' => $this->faker->name,
