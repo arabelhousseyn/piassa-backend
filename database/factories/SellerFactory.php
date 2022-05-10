@@ -26,13 +26,15 @@ class SellerFactory extends Factory
     public function configure()
     {
         return $this->afterCreating(function (Seller $seller){
+            $conditions = ['new','used'];
             $seller->profile()->create([
                 'first_name' => $this->faker->firstName,
                 'last_name' => $this->faker->lastName,
                 'commercial_name' => $this->faker->name,
                 'province_id' => 1,
                 'device_token' => null,
-                'location' => '36.7669,2.9602'
+                'location' => '36.7669,2.9602',
+                'condition' => $conditions[rand(0,1)]
             ]);
 
             $seller->jobs()->create([
