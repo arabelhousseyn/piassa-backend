@@ -76,8 +76,7 @@ class RequestUserService{
             {
                 foreach ($seller->jobs as $job)
                 {
-                    if($job->type_id == Str::upper($operation->type_id) && $user_vehicle->sign_id == $job->sign_id
-                     && $seller->profile->province_id == $user_vehicle->user->profile->province_id)
+                    if($job->type_id == Str::upper($operation->type_id) && $user_vehicle->sign_id == $job->sign_id)
                     {
                         $open = true;
                     }
