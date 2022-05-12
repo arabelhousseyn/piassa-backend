@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Events\NewRequestForSellerEvent;
+use Illuminate\Support\Facades\Log;
 use App\Models\{UserVehicle,UserRequest,User,Seller};
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -82,8 +83,7 @@ class RequestUserService{
                 foreach ($seller->types as $type) {
                     $types[] = $type->type_id;
                 }
-
-                if(in_array(Str::upper($operation->type_id),$types) && in_array($user_vehicle->sign_id,$signs))
+                if(in_array($operation->type_id,$types) && in_array($user_vehicle->sign_id,$signs))
                 {
                     $open = true;
                 }
