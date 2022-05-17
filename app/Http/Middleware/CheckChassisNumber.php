@@ -22,7 +22,7 @@ class CheckChassisNumber
         $sign = Sign::find($request->sign_id);
         if($sign->prefix !== null)
         {
-            if(!Str::startsWith($request->chassis_number,$sign->prefix))
+            if(!Str::startsWith(Str::lower($request->chassis_number),Str::lower($sign->prefix)))
             {
                 $message = [
                         'errors' => [
