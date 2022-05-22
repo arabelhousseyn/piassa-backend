@@ -27,7 +27,7 @@ class RegisterRequest extends FormRequest
             'full_name' => 'required',
             'phone' => 'required|digits:10|unique:users',
             'province_id' => 'required',
-            'gender' => 'required|in:M,F',
+            'gender' => 'required|in:M,W',
             'password' => 'required|confirmed|min:8',
             'location' => 'required',
             'has_role' => 'required'
