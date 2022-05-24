@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\{Admin, UserCart, UserOrder, User, Shipper, UserRequest};
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Str;
 use function PHPUnit\Framework\isEmpty;
 use App\Events\NewOrderEvent;
 class UserOrderController extends Controller
@@ -61,7 +62,7 @@ class UserOrderController extends Controller
                     ]);
                 }else{
                     $user_order = Auth::user()->orders()->create([
-                        'ref' => '#'.str_pad($latest_order->id + 1, 8, "0", STR_PAD_LEFT),
+                        'ref' => '#'. substr(Str::uuid(),0,10),
                         'type_delivery' => $request->type_delivery,
                         'promo_code' => null,
                         'location' => $request->location
