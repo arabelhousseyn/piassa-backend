@@ -121,6 +121,7 @@ Route::middleware('auth:sanctum')->group(function(){
         Route::get('delivery_orders',[ShipperController::class,'get_delivery_orders']);
         Route::get('confirm_delivery_order/{order_user_id}/{coord}',[ShipperController::class,'delivery_order'])->whereNumber('order_user_id');
         Route::get('commissions',[ShipperController::class,'shipper_commissions']);
+        Route::get('calculate_comission_shipper',[ShipperController::class,'CalculateComissionShipper']);
     });
 
     Route::get('types',TypeController::class);
