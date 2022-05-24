@@ -209,8 +209,11 @@ class ShipperController extends Controller
         return response(['success' => true],200);
     }
 
-    public function CalculateComissionShipper($start_coord,$end_coord,$type)
+    public function CalculateComissionShipper($start_point,$end_point,$type)
     {
+
+        $start_coord = explode(',',$start_point);
+        $end_coord = explode(',',$end_point);
         $distance = GeoFacade::setPoint([doubleval($start_coord[0]), doubleval($start_coord[1])])
             ->setOptions(['units' => ['km']])
             ->setPoint([doubleval($end_coord[0]), doubleval($end_coord[1])])
