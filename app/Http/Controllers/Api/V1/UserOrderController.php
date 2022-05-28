@@ -54,7 +54,7 @@ class UserOrderController extends Controller
                 if(isEmpty($latest_order))
                 {
                     $user_order = Auth::user()->orders()->create([
-                        'ref' => '#'.str_pad("1", STR_PAD_LEFT),
+                        'ref' => '#'. substr(Str::uuid(),0,10),
                         'type_delivery' => $request->type_delivery,
                         'amount' => $request->amount,
                         'promo_code' => null,
