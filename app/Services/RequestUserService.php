@@ -8,9 +8,9 @@ use App\Models\{UserVehicle,UserRequest,User,Seller};
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use KMLaravel\GeographicalCalculator\Facade\GeoFacade;
-use App\Traits\UploadTrait;
+use App\Traits\{UploadTrait,CustomPushNotificationTrait};
 class RequestUserService{
-    use UploadTrait;
+    use UploadTrait, CustomPushNotificationTrait;
     public function store($request)
     {
             $user = User::find(Auth::id());
@@ -68,7 +68,7 @@ class RequestUserService{
         }])->find(Auth::id());
 
         $sellers = Seller::with('profile','signs','types')->get();
-
+        $seller_ids = array();
         foreach ($sellers as $seller)
         {
             $signs = [];
@@ -90,6 +90,7 @@ class RequestUserService{
 
                 if($open)
                 {
+                    $seller_ids[] = $seller->id;
                     $info1 = explode(',',$seller->profile->location);
                     $info2 = explode(',',$user->locations[0]->location);
                     $distance = GeoFacade::setPoint([doubleval($info1[0]), doubleval($info1[1])])
@@ -134,6 +135,8 @@ class RequestUserService{
                 ]);
             }
         }
+
+        $this->pushNotification('Vous avez une nouvelle demande','nouvelle demande',$seller_ids,'sellers');
 
         return response(['success' => true,'request_id' => $operation->id],201);
     }

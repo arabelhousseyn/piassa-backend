@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use App\Http\Requests\StoreSellerSuggestionRequest;
 use App\Rules\FilterLocation;
+use App\Traits\CustomPushNotificationTrait;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
@@ -16,6 +17,7 @@ use Illuminate\Support\Carbon;
 use App\Events\{NewSuggestionEvent,NewRequestEvent};
 class SellerController extends Controller
 {
+    use CustomPushNotificationTrait;
     public function insert_location(Request $request)
     {
         $rules = [
@@ -136,6 +138,7 @@ class SellerController extends Controller
                 }
                 $data = SellerRequest::with('suggestion','request.informations')->find($request->seller_request_id);
                 event(new NewSuggestionEvent($data,$seller_request->request->vehicle->user_id));
+                $this->pushNotification('Vous avez une nouvelle suggestion','nouvelle suggestion',[$seller_request->request->vehicle->user_id],'clients');
 //                event(new NewRequestEvent($data));
                 return response(['success' => true],201);
 
