@@ -81,5 +81,10 @@ class User extends Authenticatable
         return $this->hasOne(UserInfo::class)->withDefault();
     }
 
+    public function notes()
+    {
+        return $this->hasMany(UserNote::class);
+    }
+
 
 }
