@@ -24,6 +24,7 @@ class User extends Authenticatable
         'otp',
         'password',
         'phone_verified_at',
+        'note'
     ];
 
     /**
@@ -79,11 +80,6 @@ class User extends Authenticatable
     public function commercial_info()
     {
         return $this->hasOne(UserInfo::class)->withDefault();
-    }
-
-    public function notes()
-    {
-        return $this->hasMany(UserNote::class);
     }
 
 
