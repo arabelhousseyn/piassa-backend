@@ -17,7 +17,7 @@ class UserCartController extends Controller
         }])->find(Auth::id());
         if(@$carts->carts[0])
         {
-            $user_cart = UserCart::with('items.item.request.request.informations','items.item.request.request.seller.profile')->find($carts->carts[0]->id);
+            $user_cart = UserCart::with('items.item.request.request.informations','items.item.request.seller.profile')->find($carts->carts[0]->id);
             return response($user_cart->only('id','full_at','is_empty','items'),200);
         }else{
             return response([],200);
