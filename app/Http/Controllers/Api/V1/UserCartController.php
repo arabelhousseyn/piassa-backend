@@ -18,6 +18,12 @@ class UserCartController extends Controller
         if(@$carts->carts[0])
         {
             $user_cart = UserCart::with('items.item.request.request.informations','items.item.request.seller.profile')->find($carts->carts[0]->id);
+
+            if(count($user_cart->items) == 0)
+            {
+                return response([],200);
+            }
+
             return response($user_cart->only('id','full_at','is_empty','items'),200);
         }else{
             return response([],200);
