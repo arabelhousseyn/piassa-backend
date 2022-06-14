@@ -100,7 +100,7 @@ class VehicleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        UserVehicle::where('user_id',$id)->update([$request->all()]);
+        UserVehicle::where('user_id',$id)->update($request->all());
         return response()->noContent();
     }
 
