@@ -226,10 +226,13 @@ class ShipperController extends Controller
     {
         $final = [];
         $shipper = Shipper::with('orderRequests.commission','orderRequests.order.items.item.request.request.informations')->find(Auth::id());
-        foreach ($shipper->orderRequests as $value) {
-            if($value->commission->amount !== null)
-            {
-                $final[] = $value;
+        if(!is_null($shipper->orderRequests))
+        {
+            foreach ($shipper->orderRequests as $value) {
+                if($value->commission->amount !== null)
+                {
+                    $final[] = $value;
+                }
             }
         }
         return response($final,200);
