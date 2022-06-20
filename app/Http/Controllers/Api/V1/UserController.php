@@ -78,7 +78,7 @@ class UserController extends Controller
             foreach ($item->requests as $request)
             {
                 foreach ($request->suggestions as $value) {
-                    if($value->suggest_him_at !== null)
+                    if($value->suggest_him_at !== null && $value->taken_at == null)
                     {
                         foreach ($value->suggestion as $value)
                         {
