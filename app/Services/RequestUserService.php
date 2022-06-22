@@ -113,12 +113,7 @@ class RequestUserService{
                         ];
                         $distances[] = $arr;
                     }
-                    $data = Seller::with('requests.suggestion','requests.request.vehicle.sign','requests.request.vehicle.user.profile.province','requests.request.informations'
-                        ,'requests.request.vehicle.user.locations','requests.request.images')
-                        ->with(['requests.request' => function ($query) use ($operation){
-                            return $query->whereId($operation->id);
-                        }])
-                        ->find($seller->id);
+                    $data = UserRequest::with('informations')->find($operation->id);
                     event(New NewRequestForSellerEvent($data,$seller->id));
                 }
             }
