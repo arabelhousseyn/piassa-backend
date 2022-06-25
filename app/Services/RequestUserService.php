@@ -3,7 +3,9 @@
 namespace App\Services;
 
 use App\Events\NewRequestForSellerEvent;
+use App\Notifications\NewRequestNotification;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Notification;
 use App\Models\{UserVehicle,UserRequest,User,Seller};
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -115,6 +117,8 @@ class RequestUserService{
                     }
                     $data = UserRequest::with('informations')->find($operation->id);
                     event(New NewRequestForSellerEvent($data,$seller->id));
+                    $sellers = Seller::whereIn('id',[$seller->id])->get();
+                    Notification::send($sellers,new NewRequestNotification($data));
                 }
             }
         }
