@@ -3,6 +3,7 @@
 namespace App\Traits;
 use App\Models\SellerProfile;
 use App\Models\ShipperProfile;
+use App\Models\UserProfile;
 
 trait CustomPushNotificationTrait{
 
@@ -13,7 +14,7 @@ trait CustomPushNotificationTrait{
         switch ($type)
         {
             case 'sellers' : $tokens = SellerProfile::whereIn('seller_id',$ids)->pluck('device_token'); break;
-            case 'clients' : $tokens = ShipperProfile::whereIn('shipper_id',$ids)->pluck('device_token'); break;
+            case 'clients' : $tokens = UserProfile::whereIn('user_id',$ids)->pluck('device_token'); break;
         }
 
         $SERVER_API_KEY = env('SERVER_KEY_TARGET_USERS');
