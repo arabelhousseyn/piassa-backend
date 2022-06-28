@@ -6,6 +6,7 @@ use App\Events\NewRequestForSellerEvent;
 use App\Notifications\NewRequestNotification;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use App\Models\{UserVehicle,UserRequest,User,Seller};
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -117,6 +118,7 @@ class RequestUserService{
                     }
                     $data = UserRequest::with('informations')->find($operation->id);
                     event(New NewRequestForSellerEvent($data,$seller->id));
+                    event(new RequestEvent($data));
                     $sellers = Seller::whereIn('id',[$seller->id])->get();
                     Notification::send($sellers,new NewRequestNotification($data));
                 }
