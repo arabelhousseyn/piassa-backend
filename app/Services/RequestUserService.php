@@ -122,6 +122,7 @@ class RequestUserService{
                     event(new NewRequestEvent($data));
                     $sellers = Seller::whereIn('id',[$seller->id])->get();
                     Notification::send($sellers,new NewRequestNotification($data));
+                    $this->pushNotification('Vous avez une nouvelle demande','nouvelle demande',$seller_ids,'sellers');
                 }
             }
         }
@@ -142,9 +143,6 @@ class RequestUserService{
                 ]);
             }
         }
-
-        $this->pushNotification('Vous avez une nouvelle demande','nouvelle demande',$seller_ids,'sellers');
-
         return response(['success' => true,'request_id' => $operation->id],201);
     }
 
