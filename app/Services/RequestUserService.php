@@ -119,13 +119,13 @@ class RequestUserService{
                     }
                     $data = UserRequest::with('informations')->find($operation->id);
                     event(New NewRequestForSellerEvent($data,$seller->id));
-                    event(new NewRequestEvent($data));
                     $sellers = Seller::whereIn('id',[$seller->id])->get();
                     Notification::send($sellers,new NewRequestNotification($data));
                     $this->pushNotification('Vous avez une nouvelle demande','nouvelle demande',$seller_ids,'sellers');
                 }
             }
         }
+        event(new NewRequestEvent($data));
         $temp = [];
         foreach ($distances as $distance)
         {
