@@ -78,8 +78,7 @@ class RequestUserService{
             $signs = [];
             $types = [];
             $open = false;
-            if($seller->profile->location !== null)
-            {
+
                 foreach ($seller->signs as $sign) {
                     $signs[] = $sign->sign_id;
                 }
@@ -123,7 +122,7 @@ class RequestUserService{
                     Notification::send($sellers,new NewRequestNotification($data));
                     $this->pushNotification('Vous avez une nouvelle demande','nouvelle demande',$seller_ids,'sellers');
                 }
-            }
+
         }
         event(new NewRequestEvent($data));
         $temp = [];
