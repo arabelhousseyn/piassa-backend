@@ -104,7 +104,7 @@ class RequestUserService{
                     ]);
 
                     Notification::send($sellers,new NewRequestNotification($data));
-                    $this->pushNotification('Vous avez une nouvelle demande','nouvelle demande',$seller_ids,'sellers');
+                    $this->pushNotification('Vous avez une nouvelle demande','nouvelle demande',[$seller->id],'sellers');
                 }
 
         }
